@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"page",
+				"pageY"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"Verdana",
+				"Verdana, Geneva, Arial, Helvetica, sans-serif"
+			],
+			[
+				"id",
+				"id=  (attribute)"
+			],
+			[
+				"poi",
+				"points"
+			],
+			[
 				"php",
 				"php-mit	Insert the MIT license DocBlock"
 			],
@@ -99,13 +119,61 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "js/gesture.js",
+			"settings":
+			{
+				"buffer_size": 13437,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "java/ContinuousGestureRecognizer.java",
+			"settings":
+			{
+				"buffer_size": 20683,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 460,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "css/style.css",
+			"settings":
+			{
+				"buffer_size": 466,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/app.js",
+			"settings":
+			{
+				"buffer_size": 1025,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 235.0,
+		"height": 375.0,
 		"selected_items":
 		[
+			[
+				"save",
+				"File: Save All"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
 			[
 				"git co",
 				"Git: Commit"
@@ -149,10 +217,6 @@
 			[
 				"termi",
 				"Preferences: Terminal Key Bindings – User"
-			],
-			[
-				"install",
-				"Package Control: Install Package"
 			],
 			[
 				"to",
@@ -311,7 +375,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 626.0
+		"width": 522.0
 	},
 	"console":
 	{
@@ -328,6 +392,11 @@
 	},
 	"file_history":
 	[
+		"/C/Users/tomato/AppData/Roaming/Sublime Text 2/Packages/AdvancedNewFile/Default (Windows).sublime-keymap",
+		"/E/Documents/GitHub/javascript-gesture/java/Demonstrator.java",
+		"/C/Users/tomato/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/tomato/AppData/Roaming/Sublime Text 2/Packages/HTML/html.sublime-snippet",
+		"/C/Users/tomato/AppData/Roaming/Sublime Text 2/Packages/User/fileheader.sublime-snippet",
 		"/E/Documents/GitHub/easycms/app/Model/Category.php",
 		"/E/Documents/GitHub/easycms/lib/Cake/Test/Case/Utility/ClassRegistryTest.php",
 		"/E/Documents/GitHub/easycms/app/webroot/js/ckeditor-3.6.2/ckeditor.asp",
@@ -352,7 +421,6 @@
 		"/D/htdocs/dafu/easy-products/app/Lib/Functions.php",
 		"/D/htdocs/dafu/easy-products/app/Lib/Browscap.php",
 		"/C/Users/tomato/AppData/Roaming/Sublime Text 2/Packages/Terminal/Default (Windows).sublime-keymap",
-		"/C/Users/tomato/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
 		"/C/Users/tomato/AppData/Roaming/Sublime Text 2/Packages/GBK Encoding Support/tmp/AppController.php                D%3A%5Chtdocs%5Cdafu%5Ceasy-products%5Capp%5CController%5CAppController.php",
 		"/D/htdocs/dafu/easy-products/easyproducts.sublime-project",
 		"/D/htdocs/dafu/easy-products/app/Controller/AppController.php",
@@ -388,7 +456,6 @@
 		"/D/htdocs/dafu/easy-products/app/Config/core.php",
 		"/D/htdocs/dafu/easy-products/app/Config/acl.ini.php",
 		"/D/jobs/quicksort2.php",
-		"/C/Users/tomato/AppData/Roaming/Sublime Text 2/Packages/AdvancedNewFile/Default (Windows).sublime-keymap",
 		"/C/Users/tomato/AppData/Roaming/Sublime Text 2/Packages/AdvancedNewFile/AdvancedNewFile.py",
 		"/C/Users/tomato/AppData/Roaming/Sublime Text 2/Packages/AdvancedNewFile/README.rst",
 		"/C/Windows/System32/drivers/etc/hosts",
@@ -452,10 +519,7 @@
 		"/Z/www/image_search/protected/lib/classes/BaseAdviceController.php",
 		"/Z/www/image_search/views/default/advice/advice.tpl",
 		"/Z/www/image_search/build.sh",
-		"/Z/www/image_search/protected/config/console.php",
-		"/Z/www/image_search/protected/config/adapter.php",
-		"/Z/www/mobile_image_search/mobileimage/public/css/reset.css",
-		"/Z/www/mobile_web_search/views/default/layout/main.tpl"
+		"/Z/www/image_search/protected/config/console.php"
 	],
 	"find":
 	{
@@ -471,9 +535,16 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
+			"div",
+			"generateEquiDistantProgressiveSubSequences",
+			"){",
+			"if(",
+			":function",
+			" 	",
+			"wangshijun2010@gmail.com",
 			"$_method",
 			"$method",
 			"pkg",
@@ -558,6 +629,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			") {",
+			"if (",
+			": function",
+			"	",
 			"",
 			"$this->service",
 			"protected function _get",
@@ -583,17 +658,151 @@
 			"try {",
 			"if ("
 		],
-		"reverse": true,
+		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": true,
-		"wrap": true
+		"whole_word": false,
+		"wrap": false
 	},
 	"groups":
 	[
 		{
+			"selected": 4,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "js/gesture.js",
+					"settings":
+					{
+						"buffer_size": 13437,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3768,
+								3768
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1207.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "java/ContinuousGestureRecognizer.java",
+					"settings":
+					{
+						"buffer_size": 20683,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1692,
+								1692
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 354.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "index.html",
+					"settings":
+					{
+						"buffer_size": 460,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								400,
+								400
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "css/style.css",
+					"settings":
+					{
+						"buffer_size": 466,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								426,
+								426
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "js/app.js",
+					"settings":
+					{
+						"buffer_size": 1025,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								193,
+								193
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],

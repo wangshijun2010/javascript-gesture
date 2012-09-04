@@ -10,43 +10,43 @@
 
 (function(){
 
-var Template = function(id, points) {
+window.Template = function(id, points) {
 	this.id = id;
 	this.points = points;
 };
 
-var Po= function(x, y) {
+window.Point = function(x, y) {
 	this.x = x;
 	this.y = y;
 };
 
-var Center = function(x, y) {
+window.Center = function(x, y) {
 	this.x = x;
 	this.y = y;
 };
 
-var Rectangle = function(x, y) {
+window.Rectangle = function(x, y, width, height) {
 	this.x = x;
 	this.y = y;
 	this.width = width;
 	this.height = height;
 };
 
-var Result = function(template, probability, points) {
+window.Result = function(template, probability, points) {
 	this.template = template;
 	this.probability = probability;
 	this.points = points;
 };
 
-var Pattern = function(template, segments) {
+window.Pattern = function(template, segments) {
 	this.template = template;
 	this.segments = segments;
 };
 
-var Recognizer = function(templates, samplePointDistance, debug) {
+window.Recognizer = function(templates, samplePointDistance, debug) {
 	// class variables
 	this.patterns = [];
-	this.samplePointDistance = samplePointDistance || 5;
+	this.samplePointDistance = samplePointDistance || 10;
 	this.normalizedSpace = new Rectangle(0, 0, 1000, 1000);
 	this.debug = debug === undefined ? false : debug;
 
@@ -55,7 +55,6 @@ var Recognizer = function(templates, samplePointDistance, debug) {
 	this.DEFAULT_BETA = 400.0;
 	this.DEFAULT_LAMBDA = 0.4;
 	this.DEFAULT_KAPPA = 1.0;
-	this.MAX_RESAMPLING_points = 1000;
 
 	// normalize templates
 	this.setTemplates(templates);
@@ -72,7 +71,7 @@ Recognizer.prototype = {
 	 * @param e_sigma a parameter, see the paper for details
 	 * @return a list of templates and their associated probabilities
 	 */
-	recognize: function (input, beta, lambda, kappa, e_sigma) {
+	recognize: function(input, beta, lambda, kappa, e_sigma) {
 		if (input.length < 2) {
 			new Error("Recognizer.recognize: input size must be greater than 2");
 		}
@@ -94,20 +93,21 @@ Recognizer.prototype = {
 	 * Set templates to match a stroke against
 	 * @param {array} templates array of template objects
 	 */
-	setTemplates: function (templates) {
+	setTemplates: function(templates) {
 		this.patterns = [];
 		for (var i=0, length = templates.length; i<length; i++) {
-			templates[i].points = this.normalize(templates[i].points);
-			this.patterns.push(new Pattern(templates[i], this.generateEquiDistantProgressiveSubSequences(templates[i].points, 200)));
+			templates[i].points = this._normalize(templates[i].points);
+			var segments = this.generateEquiDistantProgressiveSubSequences(templates[i].points, 200);
+			this.patterns.push(new Pattern(templates[i], segments));
 		}
 		for (var i=0, length = this.patterns.length; i<length; i++) {
 			var segments = [];
-			for (List<Pt> pts : pattern.segments) {
-				var newPoints = this.deepCopyPts(pts);
-				normalize(newPts);
-				segments.add(resample(newPts, getResamplingPointCount(newPts, samplePointDistance)));
+			for (var j=0, n = this.patterns[i].segments.length; j<n; j++) {
+				var newPoints = this._normalize(this.deepCopyPoints(this.patterns[i].segments[j]));
+				var resamplePointCount = this.getResamplingPointCount(newPoints, this.samplePointDistance);
+				segments.push(this.resample(newPoints, resamplePointCount));
 			}
-			pattern.segments = segments;
+			this.patterns[i].segments = segments;
 		}
 	},
 
@@ -125,16 +125,21 @@ Recognizer.prototype = {
 	 * @param height the height of the defined box
 	 * @return a newly created posequence that is centred and fits within the defined box
 	 */
-	normalize: function (points, x, y, width, height) {
-		var result = this.deepCopyPts(points);
-		result = this.scaleTo(result, new Rectangle(0, 0, width - x, height - y));
-		var center = this.getCenter(result);
-		result = this.translate(result, -center.x, -center.y);
-		result = this.translate(result, width - x, height - y);
-		return result;
+	normalize: function(points, x, y, width, height) {
+		var newPoints = this.deepCopyPoints(points);
+		newPoints = this.scaleTo(newPoints, new Rectangle(0, 0, width - x, height - y));
+		var center = this.getCenter(newPoints);
+		newPoints = this.translate(newPoints, -center.x, -center.y);
+		newPoints = this.translate(newPoints, width - x, height - y);
+		return newPoints;
 	},
 
-	deepCopyPts: function (points) {
+	/**
+	 * 复制1个点序列
+	 * @param  {array} points 点序列
+	 * @return {array}
+	 */
+	deepCopyPoints: function(points) {
 		var newPoints = [];
 		for (var i=0, length = points.length; i<length; i++) {
 			newPoints.push(new Point(points[i].x, points[i].y));
@@ -142,6 +147,18 @@ Recognizer.prototype = {
 		return newPoints;
 	},
 
+	_normalize: function(points) {
+		var newPoints = this.scaleTo(points, this.normalizedSpace);
+		var center = this.getCenter(newPoints);
+		return this.translate(newPoints, -center.x, -center.y);
+	},
+
+	/**
+	 * 将点序列缩放到指定的坐标区域中
+	 * @param  {array} points       点序列
+	 * @param  {object} targetBounds 边界
+	 * @return {array}
+	 */
 	scaleTo: function(points, targetBounds) {
 		var bounds = this.getBoundingBox(points);
 		var area = bounds.width * bounds.width + bounds.height * bounds.height;
@@ -150,6 +167,15 @@ Recognizer.prototype = {
 		return this.scale(points, scale, scale, bounds.x, bounds.y);
 	},
 
+	/**
+	 * 点序列缩放, 不改变点序列的左下边界位置
+	 * @param  {array} points  点序列
+	 * @param  {number} sx      横轴缩放比例
+	 * @param  {number} sy      纵轴缩放比例
+	 * @param  {number} originX 原始左边界位置
+	 * @param  {number} originY 原始下边界位置
+	 * @return {array}
+	 */
 	scale: function(points, sx, sy, originX, originY) {
 		var points = this.translate(points, -originX, -originY);
 		for (var i=0, length = points.length; i<length; i++) {
@@ -160,7 +186,14 @@ Recognizer.prototype = {
 		return points;
 	},
 
-	translate: function (points, dx, dy) {
+	/**
+	 * 点序列平移, 指定纵轴和横轴方向平移量
+	 * @param  {array} points 点序列
+	 * @param  {number} dx     横轴平移量
+	 * @param  {number} dy     纵轴平移量
+	 * @return {array}
+	 */
+	translate: function(points, dx, dy) {
 		var dx = Math.floor(dx);
 		var dy = Math.floor(dy);
 		for (var i=0, length = points.length; i<length; i++) {
@@ -171,18 +204,18 @@ Recognizer.prototype = {
 	},
 
 	/**
-	 * Get bounding of point set
+	 * 计算点序列的边界
 	 * @param  {array} points point set
 	 * @return {object}
 	 */
-	getBoundingBox: function (points) {
+	getBoundingBox: function(points) {
 		var minX = Number.MAX_VALUE;
 		var minY = Number.MAX_VALUE;
 		var maxX = Number.MIN_VALUE;
 		var maxY = Number.MIN_VALUE;
 		for (var i=0, length = points.length; i<length; i++) {
-			x = points[i].x;
-			y = points[i].y;
+			var x = points[i].x;
+			var y = points[i].y;
 			if (x < minX) {
 				minX = x;
 			}
@@ -199,7 +232,12 @@ Recognizer.prototype = {
 		return new Rectangle(minX, minY, (maxX - minX), (maxY - minY));
 	},
 
-	getCenter: function (points) {
+	/**
+	 * 计算的点序列的中心
+	 * @param  {array} points
+	 * @return {object}
+	 */
+	getCenter: function(points) {
 		var length = points.length;
 		var totalX = 0;
 		var totalY = 0;
@@ -210,23 +248,34 @@ Recognizer.prototype = {
 		return new Center(totalX / length, totalY / length);
 	},
 
-	generateEquiDistantProgressiveSubSequences: function (points, pointSpacing) {
+	/**
+	 * 从原始的点序列中重新抽样计算连续子序列
+	 * @param  {array} points       原始点序列
+	 * @param  {number} pointSpacing 抽样间距
+	 * @return {array}              抽样后的点序列的连续子序列子集
+	 */
+	generateEquiDistantProgressiveSubSequences: function(points, pointSpacing) {
 		var sequences = [];
 		var nSamplePoints = this.getResamplingPointCount(points, pointSpacing);
 		var resampledPoints = this.resample(points, nSamplePoints);
 		for (var i = 1, n = resampledPoints.length; i < n; i++) {
-			seq = this.deepCopypoints(resampledPoints.subList(0, i+1));
-			sequences.push(seq);
+			sequences.push(this.deepCopyPoints(resampledPoints.slice(0, i+1)));
 		}
 		return sequences;
 	},
 
-	getResamplingPointCount: function (points, samplePointDistance) {
-		var len = this.getSpatialLength(points);
-		return (len / samplePointDistance) + 1;
+	/**
+	 * 计算重新抽样的点个数
+	 * @param  {array} points              原始点序列
+	 * @param  {number} samplePointDistance 抽样距离
+	 * @return {number}
+	 */
+	getResamplingPointCount: function(points, samplePointDistance) {
+		var length = this.getSpatialLength(points);
+		return (length / samplePointDistance) + 1;
 	},
 
-	getSpatialLength: function (points) {
+	getSpatialLength: function(points) {
 		var length = 0;
 		var previous = next = null;
 		for (var i=0, n = points.length; i<n-1; i++) {
@@ -237,11 +286,11 @@ Recognizer.prototype = {
 		return length;
 	},
 
-	distance: function (point1, point2) {
-		return distance(point1.x, point1.y, point2.x, point2.y);
+	distance: function(point1, point2) {
+		return this._distance(point1.x, point1.y, point2.x, point2.y);
 	},
 
-	distance: function (x1, y1, x2, y2) {
+	_distance: function(x1, y1, x2, y2) {
 		if ((x2 -= x1) < 0) {
 			x2 = -x2;
 		}
@@ -251,7 +300,16 @@ Recognizer.prototype = {
 		return (x2 + y2 - (((x2 > y2) ? y2 : x2) >> 1) );
 	},
 
-	getLikelihoodOfMatch: function (points1, points2, eSigma, aSigma, lambda) {
+	/**
+	 * 计算两个点序列之间的相似度
+	 * @param  {array} points1
+	 * @param  {array} points2
+	 * @param  {number} eSigma
+	 * @param  {number} aSigma
+	 * @param  {number} lambda
+	 * @return {number}
+	 */
+	getLikelihoodOfMatch: function(points1, points2, eSigma, aSigma, lambda) {
 		if (eSigma == 0 || eSigma < 0) {
 			new Error("eSigma must be positive");
 		}
@@ -266,7 +324,13 @@ Recognizer.prototype = {
 		return Math.exp(- (x_e * x_e / (eSigma * eSigma) * lambda + x_a * x_a / (aSigma * aSigma) * (1 - lambda)));
 	},
 
-	getEuclidianDistance: function (points1, points2) {
+	/**
+	 * 计算两个点序列间的欧氏距离
+	 * @param  {array} points1
+	 * @param  {array} points2
+	 * @return {number}
+	 */
+	getEuclidianDistance: function(points1, points2) {
 		if (points1.length != points2.length) {
 			new Error("lists must be of equal lengths, cf. " + points1.length + " with " + points2.length);
 		}
@@ -275,18 +339,26 @@ Recognizer.prototype = {
 		for (var i = 0, n=points1.length; i < n; i++) {
 			totalDistance += this._getEuclideanDistance(points1[i], points2[i]);
 		}
+
 		return totalDistance / points1.length;
 	},
 
-	getTurningAngleDistance: function (points1, points2) {
+	/**
+	 * 计算两个点序列间的夹角
+	 * @param  {array} points1
+	 * @param  {array} points2
+	 * @return {number}
+	 */
+	getTurningAngleDistance: function(points1, points2) {
 		if (points1.length != points2.length) {
-			new Error("lists must be of equal lengths, cf. " + points1.length + " with " + points2.length);
+			new Error("Recognizer.getTurningAngleDistance: point sequences must be of equal lengths");
 		}
 
 		var n = points1.length;
 		var totalDistance = 0;
+
 		for (var i = 0; i < n - 1; i++) {
-			totalDistance += Math.abs(this._getTurningAngleDistance(points1[i], points1.get[i+1], points2[i], points2[i + 1]));
+			totalDistance += Math.abs(this._getTurningAngleDistance(points1[i], points1.get[i+1], points2[i], points2[i+1]));
 		}
 
 		if (Math.isNaN(totalDistance)) {
@@ -302,10 +374,10 @@ Recognizer.prototype = {
 	 * @param  {Point} point2
 	 * @return {Number}
 	 */
-	_getEuclideanDistance: function (point1, point2) {
+	_getEuclideanDistance: function(point1, point2) {
 		return Math.sqrt(this._getSquaredEuclidenDistance(point1, point2));
 	},
-	_getSquaredEuclidenDistance: function (point1, point2) {
+	_getSquaredEuclidenDistance: function(point1, point2) {
 		return (point1.x - point2.x) * (point1.x - point2.x) + (point1.y - point2.y) * (point1.y - point2.y);
 	},
 
@@ -317,7 +389,7 @@ Recognizer.prototype = {
 	 * @param  {Point} pointB2
 	 * @return {Number}
 	 */
-	_getTurningAngleDistance: function (pointA1, pointA2, pointB1, pointB2) {
+	_getTurningAngleDistance: function(pointA1, pointA2, pointB1, pointB2) {
 		var length_a = this._getEuclideanDistance(pointA1, pointA2);
 		var length_b = this._getEuclideanDistance(pointB1, pointB2);
 
@@ -333,60 +405,81 @@ Recognizer.prototype = {
 		}
 	},
 
-	resample: function (points, numTargetPoints) {
-		r = new ArrayList<Pt>();
-		inArray = toArray(points);
-		outArray = new int[numTargetPoints * 2];
+	/**
+	 * 从点序列中重新抽取指定数量的点
+	 * @param  {array} points          点序列
+	 * @param  {number} numTargetPoints 新样本的点个数
+	 * @return {array}                 新的点序列
+	 */
+	resample: function(points, numTargetPoints) {
+		var newPoints = [];
+		var inArray = this._toArray(points);
+		var outArray = [];
 
-		resample(inArray, outArray, points.length, numTargetPoints);
-		for (i = 0, n = outArray.length; i < n; i+= 2) {
-			r.add(new Pt(outArray[i], outArray[i + 1], false));
+		outArray = this._resample(inArray, outArray, points.length, numTargetPoints);
+		for (var i = 0, n = outArray.length; i < n; i+= 2) {
+			newPoints.push(new Point(outArray[i], outArray[i+1]));
 		}
-		return r;
+
+		return newPoints;
 	},
 
-	toArray: function (points) {
-		out = new int[points.length * 2];
-		for (i = 0, n = points.length * 2; i < n; i+= 2) {
-			out[i] = points.get(i / 2).x;
-			out[i + 1] = points.get(i / 2).y;
+	/**
+	 * 把点序列转化为两倍大的数组,相邻的量个数字仍为1个点
+	 * @param  {array} points 点序列
+	 * @return {array}
+	 */
+	_toArray: function(points) {
+		var out = [];
+		for (var i = 0, n = points.length * 2; i < n; i+= 2) {
+			out[i] = points[i/2].x;
+			out[i + 1] = points[i/2].y;
 		}
 		return out;
 	},
 
-	resample: function (template, buffer, n, numTargetPoints) {
-		segment_buf = new int[MAX_RESAMPLING_points];
+	/**
+	 * 从数组中重新抽样
+	 * @param  {array} template        母本
+	 * @param  {array} buffer          样本缓冲区
+	 * @param  {number} n               母本长度
+	 * @param  {number} numTargetPoints 样本长度
+	 * @return {void}
+	 */
+	_resample: function(template, buffer, n, numTargetPoints) {
+		var segment_buf = [];
 
-		l, segmentLen, horizRest, verticRest, dx, dy;
-		x1, y1, x2, y2;
-		i, m, a, segmentPoints, j, maxOutputs, end;
+		var m = n * 2;
 
-		m = n * 2;
-		l = getSpatialLength(template, n);
-		segmentLen = l / (numTargetPoints - 1);
-		getSegmentPoints(template, n, segmentLen, segment_buf);
-		horizRest = 0.0f;
-		verticRest = 0.0f;
-		x1 = template[0];
-		y1 = template[1];
-		a = 0;
-		maxOutputs = numTargetPoints * 2;
-		for (i = 2; i < m; i += 2) {
-			x2 = template[i];
-			y2 = template[i + 1];
-			segmentPoints = segment_buf[(i / 2) - 1];
-			dx = -1.0f;
-			dy = -1.0f;
+		var l = this._getSpatialLength(template, n);
+		var segmentLen = l / (numTargetPoints - 1);
+
+		this._getSegmentPoints(template, n, segmentLen, segment_buf);
+
+		var a = 0;
+		var horizRest = 0;
+		var verticRest = 0;
+
+		var x1 = template[0];
+		var y1 = template[1];
+
+		var maxOutputs = numTargetPoints * 2;
+
+		for (var i = 2; i < m; i += 2) {
+			var x2 = template[i];
+			var y2 = template[i + 1];
+			var segmentPoints = segment_buf[(i / 2) - 1];
+			var dx = -1.0;
+			var dy = -1.0;
 			if (segmentPoints - 1 <= 0) {
-				dx = 0.0f;
-				dy = 0.0f;
-			}
-			else {
-				dx = (x2 - x1) / (double) (segmentPoints);
-				dy = (y2 - y1) / (double) (segmentPoints);
+				dx = 0.0;
+				dy = 0.0;
+			} else {
+				dx = (x2 - x1) / segmentPoints;
+				dy = (y2 - y1) / segmentPoints;
 			}
 			if (segmentPoints > 0) {
-				for (j = 0; j < segmentPoints; j++) {
+				for (var j = 0; j < segmentPoints; j++) {
 					if (j == 0) {
 						if (a < maxOutputs) {
 							buffer[a] =  (x1 + horizRest);
@@ -395,8 +488,7 @@ Recognizer.prototype = {
 							verticRest = 0.0;
 							a += 2;
 						}
-					}
-					else {
+					} else {
 						if (a < maxOutputs) {
 							buffer[a] =  (x1 + j * dx);
 							buffer[a + 1] =  (y1 + j * dy);
@@ -408,37 +500,38 @@ Recognizer.prototype = {
 			x1 = x2;
 			y1 = y2;
 		}
-		end = (numTargetPoints * 2) - 2;
+
+		var end = (numTargetPoints * 2) - 2;
 		if (a < end) {
 			for (i = a; i < end; i += 2) {
 				buffer[i] = (buffer[i - 2] + template[m - 2]) / 2;
 				buffer[i + 1] = (buffer[i - 1] + template[m - 1]) / 2;
 			}
 		}
+
 		buffer[maxOutputs - 2] = template[m - 2];
 		buffer[maxOutputs - 1] = template[m - 1];
+
+		return buffer;
 	},
 
-	getSegmentPoints: function (points, n, length, buffer) {
-		i, m;
-		x1, y1, x2, y2, ps;
-		rest, currentLen;
+	_getSegmentPoints: function(points, n, length, buffer) {
+		var ps, rest, currentLen;
 
-		m = n * 2;
-		rest = 0.0f;
-		x1 = points[0];
-		y1 = points[1];
+		var m = n * 2;
+		var rest = 0;
+		var x1 = points[0];
+		var y1 = points[1];
 		for (i = 2; i < m; i += 2) {
-			x2 = points[i];
-			y2 = points[i + 1];
-			currentLen = distance(x1, y1, x2, y2);
+			var x2 = points[i];
+			var y2 = points[i + 1];
+			currentLen = this._distance(x1, y1, x2, y2);
 			currentLen += rest;
-			rest = 0.0f;
-			ps =  ((currentLen / length));
+			rest = 0.0;
+			ps = Math.floor((currentLen / length));
 			if (ps == 0) {
 				rest += currentLen;
-			}
-			else {
+			} else {
 				rest += currentLen - (ps * length);
 			}
 			if (i == 2 && ps == 0) {
@@ -451,26 +544,21 @@ Recognizer.prototype = {
 		return rest;
 	},
 
-	getSpatialLength: function (pat, n) {
-		l;
-		i, m;
-		x1, y1, x2, y2;
-
-		l = 0;
-		m = 2 * n;
+	_getSpatialLength: function(pat, n) {
+		var l = 0;
+		var m = 2 * n;
 		if (m > 2) {
-			x1 = pat[0];
-			y1 = pat[1];
-			for (i = 2; i < m; i += 2) {
-				x2 = pat[i];
-				y2 = pat[i + 1];
-				l += distance(x1, y1, x2, y2);
+			var x1 = pat[0];
+			var y1 = pat[1];
+			for (var i = 2; i < m; i += 2) {
+				var x2 = pat[i];
+				var y2 = pat[i + 1];
+				l += this._distance(x1, y1, x2, y2);
 				x1 = x2;
 				y1 = y2;
 			}
 			return l;
-		}
-		else {
+		} else {
 			return 0;
 		}
 	},
@@ -480,7 +568,7 @@ Recognizer.prototype = {
 	 * @param  {mixed} message
 	 * @return {void}
 	 */
-	log: function (message) {
+	log: function(message) {
 		this.debug && window.console && window.console.log(message);
 	},
 };

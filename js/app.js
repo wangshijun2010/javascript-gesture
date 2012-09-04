@@ -30,6 +30,7 @@ function onload(event) {
 	canvas.height = 500;
 
 	// console.dir(canvas);
+	test();
 }
 
 // Enter stroke mode when mouse down
@@ -79,4 +80,17 @@ function getEvent(event, preventDefault) {
 	// event._y = event._y - canvas.offsetTop;
 
 	return event;
+}
+
+function test() {
+	var templates = [
+		new Template("north", [new Point(0,0), new Point(0,1), new Point(0,2)]),
+		new Template("south", [new Point(0,0), new Point(0,-1), new Point(0,-2)]),
+		new Template("east", [new Point(0,0), new Point(1,0), new Point(2,0)]),
+		new Template("west", [new Point(0,0), new Point(-1,0), new Point(-2,0)]),
+	];
+
+	var recognizer = new Recognizer(templates);
+
+	console.log(recognizer);
 }

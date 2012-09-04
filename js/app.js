@@ -14,8 +14,13 @@ var isStroke = false;
 var canvas = null;
 var context = null;
 
+window.addEventListener("load", onload, false);
+window.addEventListener("mousedown", onmousedown, false);
+window.addEventListener("mouseup", onmouseup, false);
+window.addEventListener("mousemove", onmousemove, false);
+
 // Grab the indicator elements
-window.addEventListener("load", function(event) {
+function onload(event) {
 	pagex = document.querySelector("#pagex");
 	pagey = document.querySelector("#pagey");
 	canvas = document.querySelector('#canvas');
@@ -25,32 +30,32 @@ window.addEventListener("load", function(event) {
 	canvas.height = 500;
 
 	// console.dir(canvas);
-}, false);
+}
 
 // Enter stroke mode when mouse down
-window.addEventListener("mousedown", function(event){
+function onmousedown(event){
 	isStroke = true;
 	points = [];
 
-	var event = getStrokeEvent(event);
+	var event = getEvent(event);
 	context.strokeStyle = 'rgba(255,0,0,0.5)';
 	context.lineWidth = 10;
 	context.miterLimit = 0.1;
 	context.beginPath();
 	context.moveTo(event._x, event._y);
-}, false);
+}
 
 // Leave stroke mode when mouse up
-window.addEventListener("mouseup", function(event){
+function onmouseup(event){
 	isStroke = false;
 	points = [];
-}, false);
+}
 
 // Track stroke history when mouse move
-window.addEventListener("mousemove", function(event) {
+function onmousemove(event) {
 	if (isStroke === true) {
 		// console.log(event);
-		var event = getStrokeEvent(event);
+		var event = getEvent(event);
 		pagex && (pagex.innerHTML = event.pageX);
 		pagey && (pagey.innerHTML = event.pageY);
 		points.push({x: event.pageX, y: event.pageY});
@@ -59,10 +64,10 @@ window.addEventListener("mousemove", function(event) {
 		context.lineCap = "round";
 		context.stroke();
 	}
-}, false);
+}
 
 // We need to prevent default when a right mouse click is triggerred
-function getStrokeEvent(event, preventDefault) {
+function getEvent(event, preventDefault) {
 	var event = event || window.event;
 	var preventDefault = preventDefault || false;
 	preventDefault && event.preventDefault();

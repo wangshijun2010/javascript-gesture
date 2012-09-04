@@ -99,7 +99,7 @@ Collection.prototype = {
 }
 
 // Pattern
-var Pattern = function(template,segments) {
+var Pattern = function(template, segments) {
 	this.template = template;
 	this.segments = segments; //list of list of Point2D
 }

@@ -40,6 +40,12 @@ gesture.Result = function(template, probability, points) {
 	this.points = points;
 };
 
+gesture.IncrementalResult = function(template, probability, indexOfMostLikelySegment) {
+	this.template = template;
+	this.probability = probability;
+	this.indexOfMostLikelySegment = indexOfMostLikelySegment;
+};
+
 gesture.Pattern = function(template, segments) {
 	this.template = template;
 	this.segments = segments;
@@ -87,6 +93,16 @@ gesture.Recognizer.prototype = {
 		var results = this.getResults(incResults);
 
 		// TODO: sort the results
+		results.sort(function(resultA, resultB) {
+			if (resultA.probability == resultB.probability) {
+				return 0;
+			} else if (resultA.probability < resultB.probability) {
+				return 1;
+			} else {
+				return -1;
+			}
+
+		});
 
 		return results;
 	},
@@ -113,6 +129,60 @@ gesture.Recognizer.prototype = {
 		}
 	},
 
+	getResults: function(incrementalResults) {
+		var results = [];
+		for (var i=0, n = incrementalResults.length; i<n; i++) {
+			results.push(new gesture.Result(
+				incrementalResults[i].pattern.template,
+				incrementalResults[i].probability,
+				incrementalResults[i].pattern.segments[incrementalResults[i].indexOfMostLikelySegment])
+			);
+		}
+		return results;
+	},
+
+	getIncrementalResults: function(input, beta, lambda, kappa, e_sigma) {
+		var results = [];
+		var unkPts = this._normalize(this.deepCopyPts(input));
+		for (var i=0, n = this.patterns.length; i<n; i++) {
+			var result = this.getIncrementalResult(unkPts, this.patterns[i], beta, lambda, e_sigma);
+			var lastSegmentPts = this.patterns[i].segments[this.patterns[i].segments.length-1];
+			var completeProb = this.getLikelihoodOfMatch(this.resample(unkPts, lastSegmentPts.length), lastSegmentPts, e_sigma, e_sigma/beta, lambda);
+			var x = 1 - completeProb;
+			result.probability *= (1 + kappa*Math.exp(-x*x));
+			results.push(result);
+		}
+		this.marginalizeIncrementalResults(results);
+		return results;
+	},
+
+	marginalizeIncrementalResults: function(results) {
+		var total = 0;
+		for (var i=0, n = results.length; i<n; i++) {
+			total += results[i].probability;
+		}
+		for (var i=0, n = results.length; i<n; i++) {
+			results[i].probability /= total;
+		}
+	},
+
+	getIncrementalResult: function(unkPts, pattern, beta, lambda, e_sigma) {
+		var segments = pattern.segments;
+		var maxProb = 0.0;
+		var maxIndex = -1;
+		for (var i = 0, n = segments.length; i < n; i++) {
+			var points = segments[i];
+			var samplingPtCount = points.length;
+			var unkResampledPts = this.resample(unkPts, samplingPtCount);
+			var probability = this.getLikelihoodOfMatch(unkResampledPts, points, e_sigma, e_sigma/beta, lambda);
+			if (probability > maxProb) {
+				maxProb = probability;
+				maxIndex = i;
+			}
+		}
+		return new gesture.IncrementalResult(pattern, maxProb, maxIndex);
+	},
+
 	/**
 	 * Normalizes a posequence so that it is scaled and centred within a defined box.
 	 *
@@ -136,6 +206,12 @@ gesture.Recognizer.prototype = {
 		return newPoints;
 	},
 
+	_normalize: function(points) {
+		var newPoints = this.scaleTo(points, this.normalizedSpace);
+		var center = this.getCenter(newPoints);
+		return this.translate(newPoints, -center.x, -center.y);
+	},
+
 	/**
 	 * 复制1个点序列
 	 * @param  {array} points 点序列
@@ -147,12 +223,6 @@ gesture.Recognizer.prototype = {
 			newPoints.push(new gesture.Point(points[i].x, points[i].y));
 		}
 		return newPoints;
-	},
-
-	_normalize: function(points) {
-		var newPoints = this.scaleTo(points, this.normalizedSpace);
-		var center = this.getCenter(newPoints);
-		return this.translate(newPoints, -center.x, -center.y);
 	},
 
 	/**

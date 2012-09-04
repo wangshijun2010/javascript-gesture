@@ -3,11 +3,11 @@
  * Version: 2.0
  *
  * If you use this code for your research then please remember to cite our paper:
- * 
+ *
  * Kristensson, P.O. and Denby, L.C. 2011. Continuous recognition and visualization
  * of pen strokes and touch-screen gestures. In Procceedings of the 8th Eurographics
  * Symposium on Sketch-Based Interfaces and Modeling (SBIM 2011). ACM Press: 95-102.
- * 
+ *
  * Copyright (C) 2011 by Per Ola Kristensson, University of St Andrews, UK.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -16,10 +16,10 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -36,40 +36,40 @@ import java.util.List;
 /**
  * A continuous gesture recognizer. Outputs a probability distribution over
  * a set of template gestures as a function of received sampling points.
- * 
+ *
  * History:
  * Version 1.0 (August 12, 2011)   - Initial public release
  * Version 2.0 (September 6, 2011) - Simplified the public interface, simplified
  *                                   internal implementation.
- * 
+ *
  * For details of its operation, see the paper referenced below.
- * 
+ *
  * Documentation is here: http://pokristensson.com/increc.html
- * 
+ *
  * Copyright (C) 2011 Per Ola Kristensson, University of St Andrews, UK.
- * 
+ *
  * If you use this code for your research then please remember to cite our paper:
- * 
+ *
  * Kristensson, P.O. and Denby, L.C. 2011. Continuous recognition and visualization
  * of pen strokes and touch-screen gestures. In Procceedings of the 8th Eurographics
  * Symposium on Sketch-Based Interfaces and Modeling (SBIM 2011). ACM Press: 95-102.
- * 
+ *
  * @author Per Ola Kristensson
  * @author Leif Denby
  *
  */
 public class ContinuousGestureRecognizer {
-	
+
 	/* Beginning of public interface */
-	
+
 	/**
 	 * Defines a template gesture / stroke.
-	 * 
+	 *
 	 * @author Per Ola Kristensson
 	 *
 	 */
 	public static class Template {
-		
+
 		/**
 		 * The identifier for this template gesture / stroke.
 		 */
@@ -79,10 +79,10 @@ public class ContinuousGestureRecognizer {
 		 * gesture / stroke.
 		 */
 		public List<Pt> pts = new ArrayList<Pt>();
-		
+
 		/**
 		 * Creates a template gesture / stroke.
-		 * 
+		 *
 		 * @param id the identifier for this template gesture / stroke
 		 * @param points the sequence of points that define this
 		 * template gesture / stroke
@@ -93,10 +93,10 @@ public class ContinuousGestureRecognizer {
 		}
 
 	}
-	
+
 	/**
 	 * Defines a point with optional waypoint information.
-	 * 
+	 *
 	 * @author Per Ola Kristensson
 	 *
 	 */
@@ -113,17 +113,17 @@ public class ContinuousGestureRecognizer {
 
 		/**
 		 * Creates a point.
-		 * 
+		 *
 		 * @param x the horizontal component of this point
 		 * @param y the vertical component of this point
 		 */
 		public Pt(int x, int y) {
 			this(x, y, false);
 		}
-		
+
 		/**
 		 * Creates a point.
-		 * 
+		 *
 		 * @param x the horizontal component of this point
 		 * @param y the vertical component of this point
 		 */
@@ -131,17 +131,17 @@ public class ContinuousGestureRecognizer {
 			this.x = x;
 			this.y = y;
 		}
-		
+
 	}
-	
+
 	/**
 	 * Holds a recognition result.
-	 * 
+	 *
 	 * @author Per Ola Kristensson
 	 *
 	 */
 	public static class Result implements Comparable<Result> {
-		
+
 		/**
 		 * The template associated with this recognition result.
 		 */
@@ -160,7 +160,7 @@ public class ContinuousGestureRecognizer {
 			this.prob = prob;
 			this.pts = pts;
 		}
-		
+
 		@Override
 		public int compareTo(Result r) {
 			if (prob == r.prob) {
@@ -173,9 +173,9 @@ public class ContinuousGestureRecognizer {
 				return -1;
 			}
 		}
-		
+
 	}
-	
+
 	/**
 	 * Creates an instance of a continuous gesture recognizer.
 	 *
@@ -184,7 +184,7 @@ public class ContinuousGestureRecognizer {
 	public ContinuousGestureRecognizer(List<Template> templates) {
 		this(templates, 5);
 	}
-	
+
 	/**
 	 * Creates an instance of a continuous gesture recognizer.
 	 *
@@ -196,10 +196,10 @@ public class ContinuousGestureRecognizer {
 		this.samplePointDistance = samplePointDistance;
 		setTemplateSet(templates);
 	}
-	
+
 	/**
 	 * Sets the set of templates this recognizer will recognize.
-	 * 
+	 *
 	 * @param templates the set of templates this recognizer will recognize
 	 */
 	public void setTemplateSet(List<Template> templates) {
@@ -221,7 +221,7 @@ public class ContinuousGestureRecognizer {
 
 	/**
 	 * Outputs a list of templates and their associated probabilities for the given input.
-	 * 
+	 *
 	 * @param input a list of input points
 	 * @return a list of templates and their associated probabilities
 	 */
@@ -231,7 +231,7 @@ public class ContinuousGestureRecognizer {
 
 	/**
 	 * Outputs a list of templates and their associated probabilities for the given input.
-	 * 
+	 *
 	 * @param input a list of input points
 	 * @param beta a parameter, see the paper for details
 	 * @param lambda a parameter, see the paper for details
@@ -245,23 +245,23 @@ public class ContinuousGestureRecognizer {
 		}
 		List<IncrementalResult> incResults = getIncrementalResults(input, beta, lambda, kappa, e_sigma);
 		List<Result> results = getResults(incResults);
-		Collections.sort(results);	
+		Collections.sort(results);
 		return results;
 	}
-	
+
 	/**
 	 * Normalizes a point sequence so that it is scaled and centred within a defined box.
-	 * 
+	 *
 	 * (This method was implemented and exposed in the public interface to ease the
 	 * implementation of the demonstrator. This method is not used by the recognition
-	 * algorithm.) 
-	 * 
+	 * algorithm.)
+	 *
 	 * @param pts an input point sequence
 	 * @param x the horizontal component of the upper-left corner of the defined box
 	 * @param y the vertical component of the upper-left corner of the defined box
 	 * @param width the width of the defined box
 	 * @param height the height of the defined box
-	 * @return a newly created point sequence that is centred and fits within the defined box 
+	 * @return a newly created point sequence that is centred and fits within the defined box
 	 */
 	public static List<Pt> normalize(List<Pt> pts, int x, int y, int width, int height) {
 		List<Pt> outPts = deepCopyPts(pts);
@@ -271,9 +271,9 @@ public class ContinuousGestureRecognizer {
 		translate(outPts, width - x, height - y);
 		return outPts;
 	}
-	
+
 	/* End of public interface */
-	
+
 	private static double DEFAULT_E_SIGMA = 200.0;
 	private static double DEFAULT_BETA = 400.0;
 	private static double DEFAULT_LAMBDA = 0.4;
@@ -282,7 +282,7 @@ public class ContinuousGestureRecognizer {
 	private static Rect normalizedSpace = new Rect(0, 0, 1000, 1000);
 	private int samplePointDistance;
 	private List<Pattern> patterns = new ArrayList<Pattern>();
-	
+
 	private List<Result> getResults(List<IncrementalResult> incrementalResults) {
 		List<Result> results = new ArrayList<Result>(incrementalResults.size());
 		for (IncrementalResult ir : incrementalResults) {
@@ -291,7 +291,7 @@ public class ContinuousGestureRecognizer {
 		}
 		return results;
 	}
-	
+
 	private List<IncrementalResult> getIncrementalResults(List<Pt> input, double beta, double lambda, double kappa, double e_sigma) {
 		List<IncrementalResult> results = new ArrayList<IncrementalResult>();
 		List<Pt> unkPts = deepCopyPts(input);
@@ -307,11 +307,11 @@ public class ContinuousGestureRecognizer {
 		marginalizeIncrementalResults(results);
 		return results;
 	}
-	
+
 	private static void marginalizeIncrementalResults(List<IncrementalResult> results) {
 		double totalMass = 0.0d;
 		for (IncrementalResult r : results) {
-			totalMass+= r.prob; 
+			totalMass+= r.prob;
 		}
 		for (IncrementalResult r : results) {
 			r.prob/= totalMass;
@@ -334,7 +334,7 @@ public class ContinuousGestureRecognizer {
 		}
 		return new IncrementalResult(pattern, maxProb, maxIndex);
 	}
-	
+
 	private static List<Pt> deepCopyPts(List<Pt> pts) {
 		List<Pt> newPts = new ArrayList<Pt>(pts.size());
 		for (Pt pt : pts) {
@@ -342,13 +342,13 @@ public class ContinuousGestureRecognizer {
 		}
 		return newPts;
 	}
-	
+
 	private static void normalize(List<Pt> pts) {
 		scaleTo(pts, normalizedSpace);
 		Centroid c = getCentroid(pts);
 		translate(pts, -c.x, -c.y);
 	}
-	
+
 	private static void scaleTo(List<Pt> pts, Rect targetBounds) {
 		Rect bounds = getBoundingBox(pts);
 		double a1 = (double)(targetBounds.width);
@@ -358,27 +358,27 @@ public class ContinuousGestureRecognizer {
 		double scale = Math.sqrt(a1 * a1 + a2 * a2) / Math.sqrt(b1 * b1 + b2 * b2);
 		scale(pts, scale, scale, bounds.x, bounds.y);
 	}
-	
+
 	private static void scale(List<Pt> pts, double sx, double sy, double originX, double originY) {
 		translate(pts, -originX, -originY);
 		scale(pts, sx, sy);
 		translate(pts, originX, originY);
 	}
-	
+
 	private static void scale(List<Pt> pts, double sx, double sy) {
 		for (Pt pt : pts) {
 			pt.x*= sx;
 			pt.y*= sy;
 		}
 	}
-	
+
 	private static void translate(List<Pt> pts, double dx, double dy) {
 		for (Pt pt : pts) {
 			pt.x+= Math.floor(dx);
 			pt.y+= Math.floor(dy);
 		}
 	}
-	
+
 	private static Rect getBoundingBox(List<Pt> pts) {
 		int minX = Integer.MAX_VALUE;
 		int minY = Integer.MAX_VALUE;
@@ -402,7 +402,7 @@ public class ContinuousGestureRecognizer {
 		}
 		return new Rect(minX, minY, (maxX - minX), (maxY - minY));
 	}
-	
+
 	private static Centroid getCentroid(List<Pt> pts) {
 		double totalMass = pts.size();
 		double xIntegral = 0.0;
@@ -413,7 +413,7 @@ public class ContinuousGestureRecognizer {
 		}
 		return new Centroid(xIntegral / totalMass, yIntegral / totalMass);
 	}
-	
+
 	private static List<List<Pt>> generateEquiDistantProgressiveSubSequences(List<Pt> pts, int ptSpacing) {
 		List<List<Pt>> sequences = new ArrayList<List<Pt>>();
 		int nSamplePoints = getResamplingPointCount(pts, ptSpacing);
@@ -424,12 +424,12 @@ public class ContinuousGestureRecognizer {
 		}
 		return sequences;
 	}
-	
+
 	private static int getResamplingPointCount(List<Pt> pts, int samplePointDistance) {
 		double len = getSpatialLength(pts);
 		return (int)(len / samplePointDistance) + 1;
 	}
-	
+
 	private static double getSpatialLength(List<Pt> pts) {
 		double len = 0.0d;
 		Iterator<Pt> i = pts.iterator();
@@ -443,7 +443,7 @@ public class ContinuousGestureRecognizer {
 		}
 		return len;
 	}
-	
+
 	private static double distance(Pt p1, Pt p2) {
 		return distance((int)p1.x, (int)p1.y, (int)p2.x, (int)p2.y);
 	}
@@ -457,7 +457,7 @@ public class ContinuousGestureRecognizer {
 		}
 		return (x2 + y2 - (((x2 > y2) ? y2 : x2) >> 1) );
 	}
-	
+
 	private static double getLikelihoodOfMatch(List<Pt> pts1, List<Pt> pts2, double eSigma, double aSigma, double lambda) {
 		if (eSigma == 0 || eSigma < 0) {
 			throw new IllegalArgumentException("eSigma must be positive");
@@ -484,7 +484,7 @@ public class ContinuousGestureRecognizer {
 		}
 		return td / n;
 	}
-	
+
 	private static double getTurningAngleDistance(List<Pt> pts1, List<Pt> pts2) {
 		if (pts1.size() != pts2.size()) {
 			throw new IllegalArgumentException("lists must be of equal lengths, cf. " + pts1.size() + " with " + pts2.size());
@@ -499,16 +499,16 @@ public class ContinuousGestureRecognizer {
 		}
 		return td / (n - 1);
 	}
-	
+
 	private static double getEuclideanDistance(Pt pt1, Pt pt2) {
 		return Math.sqrt(getSquaredEuclidenDistance(pt1, pt2));
 	}
-	
+
 	private static double getSquaredEuclidenDistance(Pt pt1, Pt pt2) {
 		return (pt1.x - pt2.x) * (pt1.x - pt2.x) + (pt1.y - pt2.y) * (pt1.y - pt2.y);
 	}
-	
-	private static double getTurningAngleDistance(Pt ptA1, Pt ptA2, Pt ptB1, Pt ptB2) {		
+
+	private static double getTurningAngleDistance(Pt ptA1, Pt ptA2, Pt ptB1, Pt ptB2) {
 		double len_a = getEuclideanDistance(ptA1, ptA2);
 		double len_b = getEuclideanDistance(ptB1, ptB2);
 		if (len_a == 0 || len_b == 0) {
@@ -524,12 +524,12 @@ public class ContinuousGestureRecognizer {
 			}
 		}
 	}
-	
+
 	private static List<Pt> resample(List<Pt> points, int numTargetPoints) {
 		List<Pt> r = new ArrayList<Pt>();
 		int[] inArray = toArray(points);
 		int[] outArray = new int[numTargetPoints * 2];
-		
+
 		resample(inArray, outArray, points.size(), numTargetPoints);
 		for (int i = 0, n = outArray.length; i < n; i+= 2) {
 			r.add(new Pt(outArray[i], outArray[i + 1], false));
@@ -545,7 +545,7 @@ public class ContinuousGestureRecognizer {
 		}
 		return out;
 	}
-	
+
 	private static void resample(int[] template, int[] buffer, int n, int numTargetPoints) {
 		int[] segment_buf = new int[MAX_RESAMPLING_PTS];
 
@@ -610,7 +610,7 @@ public class ContinuousGestureRecognizer {
 		buffer[maxOutputs - 2] = template[m - 2];
 		buffer[maxOutputs - 1] = template[m - 1];
 	}
-	
+
 	private static double getSegmentPoints(int[] pts, int n, double length, int[] buffer) {
 		int i, m;
 		int x1, y1, x2, y2, ps;
@@ -675,7 +675,7 @@ public class ContinuousGestureRecognizer {
 			this.segments = segments;
 		}
 	}
-	
+
 	private static class Rect {
 		private int x;
 		private int y;
@@ -688,7 +688,7 @@ public class ContinuousGestureRecognizer {
 			this.height = height;
 		}
 	}
-	
+
 	private static class Centroid {
 		private double x;
 		private double y;
@@ -697,7 +697,7 @@ public class ContinuousGestureRecognizer {
 			this.y = y;
 		}
 	}
-	
+
 	private static class IncrementalResult {
 		private Pattern pattern;
 		private double prob;

@@ -4,8 +4,68 @@
 		"selected_items":
 		[
 			[
+				"wit",
+				"width"
+			],
+			[
+				"resa",
+				"resamplePointCount"
+			],
+			[
+				"Re",
+				"Recognizer"
+			],
+			[
+				"po",
+				"points1"
+			],
+			[
+				"newP",
+				"newPoints"
+			],
+			[
+				"de",
+				"deepCopyPts  (function)"
+			],
+			[
+				"points",
+				"points"
+			],
+			[
+				"sca",
+				"scaleTo"
+			],
+			[
+				"d",
+				"DEFAULT_KAPPA  (variable)"
+			],
+			[
+				"set",
+				"setTemplates"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"template",
+				"templates"
+			],
+			[
+				"can",
+				"canvas  (variable)"
+			],
+			[
 				"page",
 				"pageY"
+			],
+			[
+				"pre",
+				"preventDefault"
+			],
+			[
+				"prev",
+				"preventDefault"
 			],
 			[
 				"font",
@@ -40,20 +100,12 @@
 				"quicksort"
 			],
 			[
-				"pre",
-				"previous"
-			],
-			[
 				"array",
 				"array"
 			],
 			[
 				"lic",
 				"license"
-			],
-			[
-				"de",
-				"delta"
 			],
 			[
 				"on",
@@ -86,10 +138,6 @@
 			[
 				"sc",
 				"scrollTo"
-			],
-			[
-				"d",
-				"device-width"
 			],
 			[
 				"tab",
@@ -128,26 +176,10 @@
 			}
 		},
 		{
-			"file": "js/gesture.js",
+			"file": "js/core.js",
 			"settings":
 			{
-				"buffer_size": 13438,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "index.html",
-			"settings":
-			{
-				"buffer_size": 460,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "css/style.css",
-			"settings":
-			{
-				"buffer_size": 471,
+				"buffer_size": 15182,
 				"line_ending": "Windows"
 			}
 		},
@@ -155,7 +187,31 @@
 			"file": "js/app.js",
 			"settings":
 			{
-				"buffer_size": 1221,
+				"buffer_size": 2630,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/E/Documents/求职招聘/2012年版本/技术类201206.txt",
+			"settings":
+			{
+				"buffer_size": 2881,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "css/style.css",
+			"settings":
+			{
+				"buffer_size": 790,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 488,
 				"line_ending": "Windows"
 			}
 		},
@@ -163,7 +219,7 @@
 			"file": "js/chalkboard.js",
 			"settings":
 			{
-				"buffer_size": 38805,
+				"buffer_size": 38812,
 				"line_ending": "Windows"
 			}
 		}
@@ -171,9 +227,13 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 335.0,
+		"height": 60.0,
 		"selected_items":
 		[
+			[
+				"git status",
+				"Git: Status"
+			],
 			[
 				"create",
 				"Tmpl: Create php"
@@ -193,10 +253,6 @@
 			[
 				"git add",
 				"Git: Add Current File"
-			],
-			[
-				"git status",
-				"Git: Status"
 			],
 			[
 				"todo",
@@ -387,7 +443,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 514.0
+		"width": 522.0
 	},
 	"console":
 	{
@@ -404,6 +460,8 @@
 	},
 	"file_history":
 	[
+		"/E/Documents/GitHub/javascript-gesture/js/gesture.js",
+		"/E/Documents/GitHub/javascript-gesture/README.md",
 		"/C/Users/tomato/AppData/Roaming/Sublime Text 2/Packages/SublimeTmpl/SublimeTmpl.sublime-settings",
 		"/C/Users/tomato/.ssh/id_rsa.pub",
 		"/C/Users/tomato/AppData/Roaming/Sublime Text 2/Packages/AdvancedNewFile/Default (Windows).sublime-keymap",
@@ -529,9 +587,7 @@
 		"/Z/www/image_search/protected/modules/wap/controllers/IndexController.php",
 		"/Z/www/mobile_image_search/mobileimage/protected/lib/services/ImageAdviceService.php",
 		"/Z/www/mobile_image_search/mobileimage/protected/lib/classes/Controller.php",
-		"/Z/www/mobile_image_search/mobileimage/views/default/layout/main.tpl",
-		"/Z/www/image_search/protected/lib/classes/BaseAdviceController.php",
-		"/Z/www/image_search/views/default/advice/advice.tpl"
+		"/Z/www/mobile_image_search/mobileimage/views/default/layout/main.tpl"
 	],
 	"find":
 	{
@@ -547,9 +603,78 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"new ",
+			"window.",
+			"MAX_RESAMPLING_points",
+			"deepCopypoints",
+			"normalize",
+			"var ",
+			"Po",
+			"deepCopyPts",
+			"result",
+			"getCenter",
+			"function (",
+			"generateEquiDistantProgressiveSubSequences",
+			"toArray",
+			"getSegmentPoints",
+			"(double) (segmentPoints)",
+			"distance",
+			"Spatial",
+			"getTurningAngleDistance",
+			"getEuclidianDistance",
+			"len_b",
+			"len_a",
+			"pointA1",
+			"ptB2",
+			"ptB1",
+			"ptA2",
+			"ptA1",
+			".get(i)",
+			"td",
+			"generateEquiDistantProgressiveSubSequences",
+			"deepCopyPts",
+			"totalMass",
+			"yIntegral",
+			"xIntegral",
+			"resampledpoints",
+			"pointspacing",
+			"scale",
+			".size()",
+			"Centroid",
+			"getCentroid",
+			"b2",
+			"b1",
+			"a2",
+			"a1",
+			"p2",
+			"p1",
+			"distance",
+			"int[] ",
+			"pt2",
+			"pt1",
+			"Pt ",
+			"throw new IllegalArgumentException",
+			"(int)",
+			"int ",
+			"List<List<Pt>> ",
+			"double ",
+			"List<Pt> ",
+			"pts",
+			"private static ",
+			"private static void ",
+			"Rect ",
+			"double ",
+			"List<Pt> ",
+			"scaleTo",
+			"double",
+			"private static final int ",
+			"private static double ",
+			"Point2D",
+			"getStrokeEvent",
+			"ev",
 			"	 ",
 			"div",
 			"generateEquiDistantProgressiveSubSequences",
@@ -608,33 +733,7 @@
 			"panels",
 			"display",
 			"padding",
-			"width: 100%",
-			"u",
-			"topOffset",
-			"$searchClass",
-			"private function get",
-			"_g",
-			"=  =",
-			",'",
-			"=",
-			" += +",
-			"actionG",
-			"logHeader",
-			"printResult",
-			"///",
-			"  =  ",
-			"= >",
-			"< =",
-			"=",
-			"=([a-z])",
-			"=([a-z\\$])",
-			"=([a-z]\\$)",
-			"=([a-z])",
-			"=([\\$a-z])",
-			"=([$a-z])",
-			",$",
-			"try{",
-			"if("
+			"width: 100%"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -642,6 +741,12 @@
 		"regex": false,
 		"replace_history":
 		[
+			"function(",
+			"[i]",
+			"",
+			"new Error",
+			"",
+			"this.",
 			"	",
 			") {",
 			"if (",
@@ -675,13 +780,13 @@
 		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": false,
+		"whole_word": true,
 		"wrap": false
 	},
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -696,8 +801,8 @@
 						"selection":
 						[
 							[
-								19936,
-								19936
+								11170,
+								11318
 							]
 						],
 						"settings":
@@ -706,25 +811,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 13123.0,
+						"translation.y": 4382.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "js/gesture.js",
+					"file": "js/core.js",
 					"settings":
 					{
-						"buffer_size": 13438,
+						"buffer_size": 15182,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3026,
-								3026
+								1467,
+								1467
 							]
 						],
 						"settings":
@@ -733,25 +838,106 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2767.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "index.html",
+					"file": "js/app.js",
 					"settings":
 					{
-						"buffer_size": 460,
+						"buffer_size": 2630,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								400,
-								400
+								2094,
+								2094
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1420.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/E/Documents/求职招聘/2012年版本/技术类201206.txt",
+					"settings":
+					{
+						"buffer_size": 2881,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1504,
+								1504
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 720.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "css/style.css",
+					"settings":
+					{
+						"buffer_size": 790,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								659,
+								659
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 360.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "index.html",
+					"settings":
+					{
+						"buffer_size": 488,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								170,
+								170
 							]
 						],
 						"settings":
@@ -766,73 +952,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "css/style.css",
-					"settings":
-					{
-						"buffer_size": 471,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								471,
-								471
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "js/app.js",
-					"settings":
-					{
-						"buffer_size": 1221,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								193,
-								193
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "js/chalkboard.js",
 					"settings":
 					{
-						"buffer_size": 38805,
+						"buffer_size": 38812,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6055,
-								6055
+								1719,
+								1767
 							]
 						],
 						"settings":
@@ -842,7 +974,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2640.0,
+						"translation.y": 1080.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

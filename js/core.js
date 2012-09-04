@@ -10,44 +10,46 @@
 
 (function(){
 
-window.Template = function(id, points) {
+window.gesture = {};
+
+gesture.Template = function(id, points) {
 	this.id = id;
 	this.points = points;
 };
 
-window.Point = function(x, y) {
+gesture.Point = function(x, y) {
 	this.x = x;
 	this.y = y;
 };
 
-window.Center = function(x, y) {
+gesture.Center = function(x, y) {
 	this.x = x;
 	this.y = y;
 };
 
-window.Rectangle = function(x, y, width, height) {
+gesture.Rectangle = function(x, y, width, height) {
 	this.x = x;
 	this.y = y;
 	this.width = width;
 	this.height = height;
 };
 
-window.Result = function(template, probability, points) {
+gesture.Result = function(template, probability, points) {
 	this.template = template;
 	this.probability = probability;
 	this.points = points;
 };
 
-window.Pattern = function(template, segments) {
+gesture.Pattern = function(template, segments) {
 	this.template = template;
 	this.segments = segments;
 };
 
-window.Recognizer = function(templates, samplePointDistance, debug) {
+gesture.Recognizer = function(templates, samplePointDistance, debug) {
 	// class variables
 	this.patterns = [];
 	this.samplePointDistance = samplePointDistance || 10;
-	this.normalizedSpace = new Rectangle(0, 0, 1000, 1000);
+	this.normalizedSpace = new gesture.Rectangle(0, 0, 1000, 1000);
 	this.debug = debug === undefined ? false : debug;
 
 	// default performance paramters
@@ -60,7 +62,7 @@ window.Recognizer = function(templates, samplePointDistance, debug) {
 	this.setTemplates(templates);
 }
 
-Recognizer.prototype = {
+gesture.Recognizer.prototype = {
 	/**
 	 * Outputs a list of templates and their associated probabilities for the given input.
 	 *
@@ -98,7 +100,7 @@ Recognizer.prototype = {
 		for (var i=0, length = templates.length; i<length; i++) {
 			templates[i].points = this._normalize(templates[i].points);
 			var segments = this.generateEquiDistantProgressiveSubSequences(templates[i].points, 200);
-			this.patterns.push(new Pattern(templates[i], segments));
+			this.patterns.push(new gesture.Pattern(templates[i], segments));
 		}
 		for (var i=0, length = this.patterns.length; i<length; i++) {
 			var segments = [];
@@ -127,7 +129,7 @@ Recognizer.prototype = {
 	 */
 	normalize: function(points, x, y, width, height) {
 		var newPoints = this.deepCopyPoints(points);
-		newPoints = this.scaleTo(newPoints, new Rectangle(0, 0, width - x, height - y));
+		newPoints = this.scaleTo(newPoints, new gesture.Rectangle(0, 0, width - x, height - y));
 		var center = this.getCenter(newPoints);
 		newPoints = this.translate(newPoints, -center.x, -center.y);
 		newPoints = this.translate(newPoints, width - x, height - y);
@@ -142,7 +144,7 @@ Recognizer.prototype = {
 	deepCopyPoints: function(points) {
 		var newPoints = [];
 		for (var i=0, length = points.length; i<length; i++) {
-			newPoints.push(new Point(points[i].x, points[i].y));
+			newPoints.push(new gesture.Point(points[i].x, points[i].y));
 		}
 		return newPoints;
 	},
@@ -229,7 +231,7 @@ Recognizer.prototype = {
 				maxY = y;
 			}
 		}
-		return new Rectangle(minX, minY, (maxX - minX), (maxY - minY));
+		return new gesture.Rectangle(minX, minY, (maxX - minX), (maxY - minY));
 	},
 
 	/**
@@ -245,7 +247,7 @@ Recognizer.prototype = {
 			totalX += points[i].x;
 			totalY += points[i].y;
 		}
-		return new Center(totalX / length, totalY / length);
+		return new gesture.Center(totalX / length, totalY / length);
 	},
 
 	/**
@@ -418,7 +420,7 @@ Recognizer.prototype = {
 
 		outArray = this._resample(inArray, outArray, points.length, numTargetPoints);
 		for (var i = 0, n = outArray.length; i < n; i+= 2) {
-			newPoints.push(new Point(outArray[i], outArray[i+1]));
+			newPoints.push(new gesture.Point(outArray[i], outArray[i+1]));
 		}
 
 		return newPoints;

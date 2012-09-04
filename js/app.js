@@ -84,13 +84,13 @@ function getEvent(event, preventDefault) {
 
 function test() {
 	var templates = [
-		new Template("north", [new Point(0,0), new Point(0,1), new Point(0,2)]),
-		new Template("south", [new Point(0,0), new Point(0,-1), new Point(0,-2)]),
-		new Template("east", [new Point(0,0), new Point(1,0), new Point(2,0)]),
-		new Template("west", [new Point(0,0), new Point(-1,0), new Point(-2,0)]),
+		new gesture.Template("north", [new gesture.Point(0,0), new gesture.Point(0,1), new gesture.Point(0,2)]),
+		new gesture.Template("south", [new gesture.Point(0,0), new gesture.Point(0,-1), new gesture.Point(0,-2)]),
+		new gesture.Template("east", [new gesture.Point(0,0), new gesture.Point(1,0), new gesture.Point(2,0)]),
+		new gesture.Template("west", [new gesture.Point(0,0), new gesture.Point(-1,0), new gesture.Point(-2,0)]),
 	];
 
-	var recognizer = new Recognizer(templates);
+	var recognizer = new gesture.Recognizer(templates);
 
 	console.log(recognizer);
 }

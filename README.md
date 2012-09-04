@@ -1,1 +1,18 @@
-Edited This project do a migration from a source code of touch / stroke gesture recognition algorithm from http://pokristensson.com/increc.html which is written in java to javascript credits to Dr Per Ola Kristensson as the author of the code who generously open source it and licensed it under MIT license.
+Javascript Gesture
+==================
+
+Javascript gesture/stroke recognize engine inspired by algorithm from http://pokristensson.com/increc.html
+
+Features
+-------------------
+* live preview of the recoginize process;
+* arbitary gesture support, such as arrows, letters;
+
+Roadmap
+-------------------
+* implement a more powerful chrome gesture plugin based on this engine;
+* improve the performance of the algorithm on large-scale templates;
+
+License
+-------------------
+MIT License

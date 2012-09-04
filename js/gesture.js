@@ -166,7 +166,6 @@ Result.prototype.compareTo = function(r) {
 
 //--------------Gesture---------------------
 var Gesture = function(templates, samplePointDistance) {
-
 	this.DEFAULT_E_SIGMA = 200.0;
 	this.DEFAULT_BETA = 400.0;
 	this.DEFAULT_LAMBDA = 0.4;
@@ -185,16 +184,17 @@ Gesture.prototype = {
 
 		for(key in pts.collection) {
 			var point = pts.getItemAt(key);
-			arr.add(key,new Point2D(point.x,point.y));
+			arr.add(key, new Point2D(point.x,point.y));
 		}
 
 		return arr;
-
 	},
+
 	distance: function (pt1,pt2) {
 
 		return this.distance(pt1.x,pt1.y,pt2.x,pt2.y);
 	},
+
 	distance: function (x1,y1,x2,y2) {
 
 		if ((x2 -= x1) < 0) {

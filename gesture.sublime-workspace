@@ -120,18 +120,18 @@
 	"buffers":
 	[
 		{
-			"file": "js/gesture.js",
-			"settings":
-			{
-				"buffer_size": 13437,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "java/ContinuousGestureRecognizer.java",
 			"settings":
 			{
 				"buffer_size": 20683,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/gesture.js",
+			"settings":
+			{
+				"buffer_size": 13438,
 				"line_ending": "Windows"
 			}
 		},
@@ -147,7 +147,7 @@
 			"file": "css/style.css",
 			"settings":
 			{
-				"buffer_size": 466,
+				"buffer_size": 471,
 				"line_ending": "Windows"
 			}
 		},
@@ -155,7 +155,15 @@
 			"file": "js/app.js",
 			"settings":
 			{
-				"buffer_size": 1025,
+				"buffer_size": 1221,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/chalkboard.js",
+			"settings":
+			{
+				"buffer_size": 38805,
 				"line_ending": "Windows"
 			}
 		}
@@ -163,16 +171,20 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 375.0,
+		"height": 335.0,
 		"selected_items":
 		[
 			[
-				"save",
-				"File: Save All"
+				"create",
+				"Tmpl: Create php"
 			],
 			[
 				"install",
 				"Package Control: Install Package"
+			],
+			[
+				"save",
+				"File: Save All"
 			],
 			[
 				"git co",
@@ -375,7 +387,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 522.0
+		"width": 514.0
 	},
 	"console":
 	{
@@ -392,6 +404,8 @@
 	},
 	"file_history":
 	[
+		"/C/Users/tomato/AppData/Roaming/Sublime Text 2/Packages/SublimeTmpl/SublimeTmpl.sublime-settings",
+		"/C/Users/tomato/.ssh/id_rsa.pub",
 		"/C/Users/tomato/AppData/Roaming/Sublime Text 2/Packages/AdvancedNewFile/Default (Windows).sublime-keymap",
 		"/E/Documents/GitHub/javascript-gesture/java/Demonstrator.java",
 		"/C/Users/tomato/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
@@ -517,9 +531,7 @@
 		"/Z/www/mobile_image_search/mobileimage/protected/lib/classes/Controller.php",
 		"/Z/www/mobile_image_search/mobileimage/views/default/layout/main.tpl",
 		"/Z/www/image_search/protected/lib/classes/BaseAdviceController.php",
-		"/Z/www/image_search/views/default/advice/advice.tpl",
-		"/Z/www/image_search/build.sh",
-		"/Z/www/image_search/protected/config/console.php"
+		"/Z/www/image_search/views/default/advice/advice.tpl"
 	],
 	"find":
 	{
@@ -538,6 +550,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"	 ",
 			"div",
 			"generateEquiDistantProgressiveSubSequences",
 			"){",
@@ -629,6 +642,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"	",
 			") {",
 			"if (",
 			": function",
@@ -667,38 +681,11 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "js/gesture.js",
-					"settings":
-					{
-						"buffer_size": 13437,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3768,
-								3768
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1207.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "java/ContinuousGestureRecognizer.java",
 					"settings":
 					{
@@ -709,8 +696,8 @@
 						"selection":
 						[
 							[
-								1692,
-								1692
+								19936,
+								19936
 							]
 						],
 						"settings":
@@ -719,7 +706,34 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 354.0,
+						"translation.y": 13123.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "js/gesture.js",
+					"settings":
+					{
+						"buffer_size": 13438,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3026,
+								3026
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2767.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -756,20 +770,21 @@
 					"file": "css/style.css",
 					"settings":
 					{
-						"buffer_size": 466,
+						"buffer_size": 471,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								426,
-								426
+								471,
+								471
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -782,7 +797,7 @@
 					"file": "js/app.js",
 					"settings":
 					{
-						"buffer_size": 1025,
+						"buffer_size": 1221,
 						"regions":
 						{
 						},
@@ -795,10 +810,39 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "js/chalkboard.js",
+					"settings":
+					{
+						"buffer_size": 38805,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6055,
+								6055
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2640.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

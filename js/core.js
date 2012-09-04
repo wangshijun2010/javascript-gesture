@@ -65,7 +65,7 @@ gesture.Recognizer = function(templates, samplePointDistance, debug) {
 	this.DEFAULT_KAPPA = 1.0;
 
 	// normalize templates
-	this.setTemplates(templates);
+	this.setTemplateSet(templates);
 }
 
 gesture.Recognizer.prototype = {
@@ -113,12 +113,13 @@ gesture.Recognizer.prototype = {
 	 * Set templates to match a stroke against
 	 * @param {array} templates array of template objects
 	 */
-	setTemplates: function(templates) {
+	setTemplateSet: function(templates) {
 		this.patterns = [];
 		for (var i=0, length = templates.length; i<length; i++) {
 			templates[i].points = this._normalize(templates[i].points);
 			var segments = this.generateEquiDistantProgressiveSubSequences(templates[i].points, 200);
 			this.patterns.push(new gesture.Pattern(templates[i], segments));
+			this.log(templates[i].id + ": " + JSON.stringify(templates[i].points));
 		}
 		for (var i=0, length = this.patterns.length; i<length; i++) {
 			var segments = [];
@@ -346,7 +347,7 @@ gesture.Recognizer.prototype = {
 	 */
 	getResamplingPointCount: function(points, samplePointDistance) {
 		var length = this.getSpatialLength(points);
-		return (length / samplePointDistance) + 1;
+		return Math.ceil(length / samplePointDistance);
 	},
 
 	getSpatialLength: function(points) {
@@ -502,8 +503,8 @@ gesture.Recognizer.prototype = {
 	_toArray: function(points) {
 		var out = [];
 		for (var i = 0, n = points.length * 2; i < n; i+= 2) {
-			out[i] = points[i/2].x;
-			out[i + 1] = points[i/2].y;
+			out[i] = Math.floor(points[i/2].x);
+			out[i + 1] = Math.floor(points[i/2].y);
 		}
 		return out;
 	},
@@ -527,8 +528,8 @@ gesture.Recognizer.prototype = {
 		this._getSegmentPoints(template, n, segmentLen, segment_buf);
 
 		var a = 0;
-		var horizRest = 0;
-		var verticRest = 0;
+		var horizRest = 0.0;
+		var verticRest = 0.0;
 
 		var x1 = template[0];
 		var y1 = template[1];
@@ -552,16 +553,16 @@ gesture.Recognizer.prototype = {
 				for (var j = 0; j < segmentPoints; j++) {
 					if (j == 0) {
 						if (a < maxOutputs) {
-							buffer[a] =  (x1 + horizRest);
-							buffer[a + 1] =  (y1 + verticRest);
+							buffer[a] =  Math.floor(x1 + horizRest);
+							buffer[a + 1] =  Math.floor(y1 + verticRest);
 							horizRest = 0.0;
 							verticRest = 0.0;
 							a += 2;
 						}
 					} else {
 						if (a < maxOutputs) {
-							buffer[a] =  (x1 + j * dx);
-							buffer[a + 1] =  (y1 + j * dy);
+							buffer[a] =  Math.floor(x1 + j * dx);
+							buffer[a + 1] =  Math.floor(y1 + j * dy);
 							a += 2;
 						}
 					}

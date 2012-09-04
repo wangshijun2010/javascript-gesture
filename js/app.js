@@ -51,9 +51,8 @@ function onmousedown(event){
 function onmouseup(event){
 	isStroke = false;
 	var results = recognizer.recognize(points);
-	// console.log(results);
-	var result = results.shift();
-	console.log(result.template.id);
+	console.log(results);
+	console.log(results.shift().template.id);
 	points = [];
 }
 
@@ -69,6 +68,8 @@ function onmousemove(event) {
 		context.lineTo(event._x, event._y);
 		context.lineCap = "round";
 		context.stroke();
+
+		// console.log(recognizer.recognize(points).shift().template.id);
 	}
 }
 
@@ -90,12 +91,12 @@ function getEvent(event, preventDefault) {
 function test() {
 	var templates = [
 		new gesture.Template("north", [new gesture.Point(0,0), new gesture.Point(0,1), new gesture.Point(0,2)]),
-		new gesture.Template("south", [new gesture.Point(0,0), new gesture.Point(0,-1), new gesture.Point(0,-2)]),
+		new gesture.Template("south", [new gesture.Point(0,2), new gesture.Point(0,1), new gesture.Point(0,0)]),
 		new gesture.Template("east", [new gesture.Point(0,0), new gesture.Point(1,0), new gesture.Point(2,0)]),
-		new gesture.Template("west", [new gesture.Point(0,0), new gesture.Point(-1,0), new gesture.Point(-2,0)]),
+		new gesture.Template("west", [new gesture.Point(2,0), new gesture.Point(1,0), new gesture.Point(0,0)]),
 	];
 
-	recognizer = new gesture.Recognizer(templates, 10, false);
+	recognizer = new gesture.Recognizer(templates, 10, true);
 
 	console.log(recognizer);
 }

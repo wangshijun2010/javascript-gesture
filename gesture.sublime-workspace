@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"pat",
+				"pattern"
+			],
+			[
+				"res",
+				"resultB"
+			],
+			[
+				"pro",
+				"probability"
+			],
+			[
 				"wit",
 				"width"
 			],
@@ -171,7 +183,7 @@
 			"file": "java/ContinuousGestureRecognizer.java",
 			"settings":
 			{
-				"buffer_size": 20683,
+				"buffer_size": 20603,
 				"line_ending": "Windows"
 			}
 		},
@@ -179,7 +191,7 @@
 			"file": "js/core.js",
 			"settings":
 			{
-				"buffer_size": 15182,
+				"buffer_size": 17667,
 				"line_ending": "Windows"
 			}
 		},
@@ -187,15 +199,7 @@
 			"file": "js/app.js",
 			"settings":
 			{
-				"buffer_size": 2630,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/E/Documents/求职招聘/2012年版本/技术类201206.txt",
-			"settings":
-			{
-				"buffer_size": 2881,
+				"buffer_size": 2835,
 				"line_ending": "Windows"
 			}
 		},
@@ -227,9 +231,13 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 60.0,
+		"height": 375.0,
 		"selected_items":
 		[
+			[
+				"save",
+				"File: Save All"
+			],
 			[
 				"git status",
 				"Git: Status"
@@ -241,10 +249,6 @@
 			[
 				"install",
 				"Package Control: Install Package"
-			],
-			[
-				"save",
-				"File: Save All"
 			],
 			[
 				"git co",
@@ -460,6 +464,7 @@
 	},
 	"file_history":
 	[
+		"/E/Documents/求职招聘/2012年版本/技术类201206.txt",
 		"/E/Documents/GitHub/javascript-gesture/js/gesture.js",
 		"/E/Documents/GitHub/javascript-gesture/README.md",
 		"/C/Users/tomato/AppData/Roaming/Sublime Text 2/Packages/SublimeTmpl/SublimeTmpl.sublime-settings",
@@ -586,8 +591,7 @@
 		"/Z/www/mobile_image_search/mobileimage/protected/lib/classes/ImageController.php",
 		"/Z/www/image_search/protected/modules/wap/controllers/IndexController.php",
 		"/Z/www/mobile_image_search/mobileimage/protected/lib/services/ImageAdviceService.php",
-		"/Z/www/mobile_image_search/mobileimage/protected/lib/classes/Controller.php",
-		"/Z/www/mobile_image_search/mobileimage/views/default/layout/main.tpl"
+		"/Z/www/mobile_image_search/mobileimage/protected/lib/classes/Controller.php"
 	],
 	"find":
 	{
@@ -606,6 +610,18 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"deepCopyPts",
+			"deepCopy",
+			"setTemplates",
+			"(int)",
+			"deepCopyPts",
+			"pts",
+			"prob",
+			"IncrementalResult",
+			".get(i)",
+			"size()",
+			"ir",
+			"double ",
 			"new ",
 			"window.",
 			"MAX_RESAMPLING_points",
@@ -721,19 +737,7 @@
 			"\"",
 			"\"C:\\Users\\shijun\\AppData\\Roaming\\Sublime Text 2\\Packages\\",
 			"copyrightprovider",
-			"panel",
-			"from",
-			"45px",
-			"mainScroller",
-			"scroller",
-			":  ",
-			":",
-			"panels",
-			"panelS",
-			"panels",
-			"display",
-			"padding",
-			"width: 100%"
+			"panel"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -780,13 +784,13 @@
 		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": true,
+		"whole_word": false,
 		"wrap": false
 	},
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -794,15 +798,15 @@
 					"file": "java/ContinuousGestureRecognizer.java",
 					"settings":
 					{
-						"buffer_size": 20683,
+						"buffer_size": 20603,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11170,
-								11318
+								11978,
+								11978
 							]
 						],
 						"settings":
@@ -811,7 +815,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4382.0,
+						"translation.y": 5322.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -821,15 +825,15 @@
 					"file": "js/core.js",
 					"settings":
 					{
-						"buffer_size": 15182,
+						"buffer_size": 17667,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1467,
-								1467
+								3409,
+								3409
 							]
 						],
 						"settings":
@@ -838,7 +842,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2162.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -848,15 +852,15 @@
 					"file": "js/app.js",
 					"settings":
 					{
-						"buffer_size": 2630,
+						"buffer_size": 2835,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2094,
-								2094
+								1332,
+								1332
 							]
 						],
 						"settings":
@@ -865,40 +869,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1420.0,
+						"translation.y": 900.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "/E/Documents/求职招聘/2012年版本/技术类201206.txt",
-					"settings":
-					{
-						"buffer_size": 2881,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1504,
-								1504
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 720.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "css/style.css",
 					"settings":
 					{
@@ -925,7 +902,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 4,
 					"file": "index.html",
 					"settings":
 					{
@@ -952,7 +929,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 5,
 					"file": "js/chalkboard.js",
 					"settings":
 					{
@@ -1065,7 +1042,7 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 231.0,
 	"status_bar_visible": true
 }

@@ -13,6 +13,7 @@ var points = [];
 var isStroke = false;
 var canvas = null;
 var context = null;
+var recognizer = null;
 
 window.addEventListener("load", onload, false);
 window.addEventListener("mousedown", onmousedown, false);
@@ -49,6 +50,10 @@ function onmousedown(event){
 // Leave stroke mode when mouse up
 function onmouseup(event){
 	isStroke = false;
+	var results = recognizer.recognize(points);
+	// console.log(results);
+	var result = results.shift();
+	console.log(result.template.id);
 	points = [];
 }
 
@@ -90,7 +95,7 @@ function test() {
 		new gesture.Template("west", [new gesture.Point(0,0), new gesture.Point(-1,0), new gesture.Point(-2,0)]),
 	];
 
-	var recognizer = new gesture.Recognizer(templates);
+	recognizer = new gesture.Recognizer(templates, 10, false);
 
 	console.log(recognizer);
 }

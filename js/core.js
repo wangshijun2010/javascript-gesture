@@ -3,7 +3,7 @@
  *
  * @author	 wangshijun <wangshijun2010@gmail.com>
  * @copyright	(c) 2012 wangshijun <wangshijun2010@gmail.com>
- * @package	wangshijun2010@gmail.com
+ * @package		gesture
  * @subpackage	default
  * @link https://github.com/wangshijun2010/javascript-gesture
  */
@@ -40,8 +40,8 @@ gesture.Result = function(template, probability, points) {
 	this.points = points;
 };
 
-gesture.IncrementalResult = function(template, probability, indexOfMostLikelySegment) {
-	this.template = template;
+gesture.IncrementalResult = function(pattern, probability, indexOfMostLikelySegment) {
+	this.pattern = pattern;
 	this.probability = probability;
 	this.indexOfMostLikelySegment = indexOfMostLikelySegment;
 };
@@ -89,8 +89,10 @@ gesture.Recognizer.prototype = {
 		var kappa = kappa || this.DEFAULT_KAPPA;
 		var e_sigma = e_sigma || this.DEFAULT_E_SIGMA;
 
-		var incResults = this.getIncrementalResults(input, beta, lambda, kappa, e_sigma);
-		var results = this.getResults(incResults);
+		var incrementalResults = this.getIncrementalResults(input, beta, lambda, kappa, e_sigma);
+		var results = this.getResults(incrementalResults);
+
+		this.log(incrementalResults);
 
 		// TODO: sort the results
 		results.sort(function(resultA, resultB) {
@@ -143,7 +145,7 @@ gesture.Recognizer.prototype = {
 
 	getIncrementalResults: function(input, beta, lambda, kappa, e_sigma) {
 		var results = [];
-		var unkPts = this._normalize(this.deepCopyPts(input));
+		var unkPts = this._normalize(this.deepCopyPoints(input));
 		for (var i=0, n = this.patterns.length; i<n; i++) {
 			var result = this.getIncrementalResult(unkPts, this.patterns[i], beta, lambda, e_sigma);
 			var lastSegmentPts = this.patterns[i].segments[this.patterns[i].segments.length-1];
@@ -430,11 +432,7 @@ gesture.Recognizer.prototype = {
 		var totalDistance = 0;
 
 		for (var i = 0; i < n - 1; i++) {
-			totalDistance += Math.abs(this._getTurningAngleDistance(points1[i], points1.get[i+1], points2[i], points2[i+1]));
-		}
-
-		if (Math.isNaN(totalDistance)) {
-			return 0;
+			totalDistance += Math.abs(this._getTurningAngleDistance(points1[i], points1[i+1], points2[i], points2[i+1]));
 		}
 
 		return totalDistance / (n - 1);

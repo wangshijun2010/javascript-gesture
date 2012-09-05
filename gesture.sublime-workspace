@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"st",
+				"stringify"
+			],
+			[
 				"pat",
 				"pattern"
 			],
@@ -191,7 +195,7 @@
 			"file": "js/core.js",
 			"settings":
 			{
-				"buffer_size": 17667,
+				"buffer_size": 17836,
 				"line_ending": "Windows"
 			}
 		},
@@ -199,7 +203,7 @@
 			"file": "js/app.js",
 			"settings":
 			{
-				"buffer_size": 2835,
+				"buffer_size": 3092,
 				"line_ending": "Windows"
 			}
 		},
@@ -790,7 +794,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -805,8 +809,8 @@
 						"selection":
 						[
 							[
-								11978,
-								11978
+								9234,
+								9234
 							]
 						],
 						"settings":
@@ -815,7 +819,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 5322.0,
+						"translation.y": 12282.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -825,15 +829,15 @@
 					"file": "js/core.js",
 					"settings":
 					{
-						"buffer_size": 17667,
+						"buffer_size": 17836,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3409,
-								3409
+								1387,
+								1387
 							]
 						],
 						"settings":
@@ -842,7 +846,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2162.0,
+						"translation.y": 902.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -852,15 +856,15 @@
 					"file": "js/app.js",
 					"settings":
 					{
-						"buffer_size": 2835,
+						"buffer_size": 3092,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1332,
-								1332
+								1254,
+								1254
 							]
 						],
 						"settings":
@@ -869,7 +873,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 900.0,
+						"translation.y": 780.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

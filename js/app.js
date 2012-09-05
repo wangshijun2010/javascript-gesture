@@ -51,8 +51,8 @@ function onmousedown(event){
 function onmouseup(event){
 	isStroke = false;
 	var results = recognizer.recognize(points);
-	console.log(results);
-	console.log(results.shift().template.id);
+	//console.log(results);
+	console.log(results[0].template.id);
 	points = [];
 }
 
@@ -90,10 +90,14 @@ function getEvent(event, preventDefault) {
 
 function test() {
 	var templates = [
-		new gesture.Template("north", [new gesture.Point(0,0), new gesture.Point(0,1), new gesture.Point(0,2)]),
-		new gesture.Template("south", [new gesture.Point(0,2), new gesture.Point(0,1), new gesture.Point(0,0)]),
-		new gesture.Template("east", [new gesture.Point(0,0), new gesture.Point(1,0), new gesture.Point(2,0)]),
-		new gesture.Template("west", [new gesture.Point(2,0), new gesture.Point(1,0), new gesture.Point(0,0)]),
+		new gesture.Template("north", [new gesture.Point(0,0), new gesture.Point(0,1)]),
+		new gesture.Template("south", [new gesture.Point(0,1), new gesture.Point(0,0)]),
+		new gesture.Template("east", [new gesture.Point(0,0), new gesture.Point(1,0)]),
+		new gesture.Template("west", [new gesture.Point(1,0), new gesture.Point(0,0)]),
+		new gesture.Template("north-west", [new gesture.Point(0,0), new gesture.Point(-1,1)]),
+		new gesture.Template("north-east", [new gesture.Point(0,0), new gesture.Point(1,1)]),
+		new gesture.Template("south-west", [new gesture.Point(0,0), new gesture.Point(-1,-1)]),
+		new gesture.Template("south-east", [new gesture.Point(0,0), new gesture.Point(1,-1)]),
 	];
 
 	recognizer = new gesture.Recognizer(templates, 10, true);

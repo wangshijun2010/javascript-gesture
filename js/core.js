@@ -55,7 +55,7 @@ gesture.Recognizer = function(templates, samplePointDistance, debug) {
 	// class variables
 	this.patterns = [];
 	this.samplePointDistance = samplePointDistance || 10;
-	this.normalizedSpace = new gesture.Rectangle(0, 0, 1000, 1000);
+	this.normalizedSpace = new gesture.Rectangle(0, 0, 500, 500);
 	this.debug = debug === undefined ? false : debug;
 
 	// default performance paramters
@@ -147,6 +147,8 @@ gesture.Recognizer.prototype = {
 	getIncrementalResults: function(input, beta, lambda, kappa, e_sigma) {
 		var results = [];
 		var unkPts = this._normalize(this.deepCopyPoints(input));
+		this.log("Original Input: " + JSON.stringify(input));
+		this.log("Updated Input: " + JSON.stringify(unkPts));
 		for (var i=0, n = this.patterns.length; i<n; i++) {
 			var result = this.getIncrementalResult(unkPts, this.patterns[i], beta, lambda, e_sigma);
 			var lastSegmentPts = this.patterns[i].segments[this.patterns[i].segments.length-1];
@@ -165,7 +167,7 @@ gesture.Recognizer.prototype = {
 			total += results[i].probability;
 		}
 		for (var i=0, n = results.length; i<n; i++) {
-			results[i].probability /= total;
+			results[i].probability = results[i].probability / total;
 		}
 	},
 
@@ -254,8 +256,8 @@ gesture.Recognizer.prototype = {
 	scale: function(points, sx, sy, originX, originY) {
 		var points = this.translate(points, -originX, -originY);
 		for (var i=0, length = points.length; i<length; i++) {
-			points[i].x *= sx;
-			points[i].y *= sy;
+			points[i].x = Math.floor(points[i].x * sx);
+			points[i].y = Math.floor(points[i].y * sy);
 		}
 		var points = this.translate(points, originX, originY);
 		return points;
@@ -316,7 +318,7 @@ gesture.Recognizer.prototype = {
 		var length = points.length;
 		var totalX = 0;
 		var totalY = 0;
-		for (var i=0, length = points.length; i<length; i++) {
+		for (var i=0, n = points.length; i<n; i++) {
 			totalX += points[i].x;
 			totalY += points[i].y;
 		}
@@ -504,7 +506,7 @@ gesture.Recognizer.prototype = {
 		var out = [];
 		for (var i = 0, n = points.length * 2; i < n; i+= 2) {
 			out[i] = Math.floor(points[i/2].x);
-			out[i + 1] = Math.floor(points[i/2].y);
+			out[i+1] = Math.floor(points[i/2].y);
 		}
 		return out;
 	},
@@ -623,7 +625,7 @@ gesture.Recognizer.prototype = {
 			var y1 = pat[1];
 			for (var i = 2; i < m; i += 2) {
 				var x2 = pat[i];
-				var y2 = pat[i + 1];
+				var y2 = pat[i+1];
 				l += this._distance(x1, y1, x2, y2);
 				x1 = x2;
 				y1 = y2;
@@ -641,7 +643,7 @@ gesture.Recognizer.prototype = {
 	 */
 	log: function(message) {
 		this.debug && window.console && window.console.log(message);
-	},
+	}
 };
 
 })(window);

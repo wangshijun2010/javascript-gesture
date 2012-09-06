@@ -7,8 +7,6 @@
  * @subpackage	default
  */
 
-var pagex = null;
-var pagey = null;
 var points = [];
 var isStroke = false;
 var canvas = null;
@@ -16,22 +14,21 @@ var context = null;
 var recognizer = null;
 
 window.addEventListener("load", onload, false);
-window.addEventListener("mousedown", onmousedown, false);
-window.addEventListener("mouseup", onmouseup, false);
-window.addEventListener("mousemove", onmousemove, false);
 
 // Grab the indicator elements
 function onload(event) {
-	pagex = document.querySelector("#pagex");
-	pagey = document.querySelector("#pagey");
 	canvas = document.querySelector('#canvas');
 	context = canvas.getContext('2d');
 
-	canvas.width = 500;
-	canvas.height = 500;
+	canvas.width = 480;
+	canvas.height = 300;
+
+	canvas.addEventListener("mousedown", onmousedown, false);
+	canvas.addEventListener("mouseup", onmouseup, false);
+	canvas.addEventListener("mousemove", onmousemove, false);
 
 	// console.dir(canvas);
-	test();
+	createRecognizer();
 }
 
 // Enter stroke mode when mouse down
@@ -40,8 +37,13 @@ function onmousedown(event){
 	points = [];
 
 	var event = getEvent(event);
-	context.strokeStyle = 'rgba(255,0,0,0.5)';
-	context.lineWidth = 10;
+	// context.strokeStyle = 'rgba(0,0,0,0.5)';
+	// context.beginPath();
+	// context.arc(event._x, event._y, 8, 0, 2*Math.PI);
+	// context.stroke();
+
+	context.strokeStyle = 'rgba(255,64,64,0.5)';
+	context.lineWidth = 8;
 	context.miterLimit = 0.1;
 	context.beginPath();
 	context.moveTo(event._x, event._y);
@@ -50,9 +52,9 @@ function onmousedown(event){
 // Leave stroke mode when mouse up
 function onmouseup(event){
 	isStroke = false;
-	var results = recognizer.recognize(points);
-	//console.log(results);
-	console.log(results[0].template.id);
+	// var results = recognizer.recognize(points);
+	// console.log(results);
+	// console.log(results[0].template.id);
 	points = [];
 }
 
@@ -61,15 +63,22 @@ function onmousemove(event) {
 	if (isStroke === true) {
 		// console.log(event);
 		var event = getEvent(event);
-		pagex && (pagex.innerHTML = event.pageX);
-		pagey && (pagey.innerHTML = event.pageY);
 		points.push({x: event.pageX, y: event.pageY});
 
 		context.lineTo(event._x, event._y);
 		context.lineCap = "round";
 		context.stroke();
 
-		// console.log(recognizer.recognize(points).shift().template.id);
+		var current = recognizer.recognize(points)[0].template.id;
+		var templates = document.querySelectorAll(".template");
+
+		for (var i=0, n=templates.length; i<n; i++) {
+			if (templates[i].id == current) {
+				templates[i].className = "template current";
+			} else {
+				templates[i].className = "template";
+			}
+		}
 	}
 }
 
@@ -88,19 +97,76 @@ function getEvent(event, preventDefault) {
 	return event;
 }
 
-function test() {
+// Note: the coordinate system in the browser is different from the mathmatic ones
+function createRecognizer() {
 	var templates = [
-		new gesture.Template("north", [new gesture.Point(0,0), new gesture.Point(0,1)]),
-		new gesture.Template("south", [new gesture.Point(0,1), new gesture.Point(0,0)]),
+		new gesture.Template("south", [new gesture.Point(0,0), new gesture.Point(0,1)]),
+		new gesture.Template("north", [new gesture.Point(0,1), new gesture.Point(0,0)]),
 		new gesture.Template("east", [new gesture.Point(0,0), new gesture.Point(1,0)]),
 		new gesture.Template("west", [new gesture.Point(1,0), new gesture.Point(0,0)]),
-		new gesture.Template("north-west", [new gesture.Point(0,0), new gesture.Point(-1,1)]),
-		new gesture.Template("north-east", [new gesture.Point(0,0), new gesture.Point(1,1)]),
-		new gesture.Template("south-west", [new gesture.Point(0,0), new gesture.Point(-1,-1)]),
-		new gesture.Template("south-east", [new gesture.Point(0,0), new gesture.Point(1,-1)]),
+		new gesture.Template("south-west", [new gesture.Point(0,0), new gesture.Point(-1,1)]),
+		new gesture.Template("south-east", [new gesture.Point(0,0), new gesture.Point(1,1)]),
+		new gesture.Template("north-west", [new gesture.Point(0,0), new gesture.Point(-1,-1)]),
+		new gesture.Template("north-east", [new gesture.Point(0,0), new gesture.Point(1,-1)]),
 	];
 
-	recognizer = new gesture.Recognizer(templates, 10, true);
+	recognizer = new gesture.Recognizer(templates, 10, false);
+
+	var templates = [
+		new gesture.Template("south", [new gesture.Point(50,15), new gesture.Point(50,85)]),
+		new gesture.Template("north", [new gesture.Point(50,85), new gesture.Point(50,15)]),
+		new gesture.Template("east", [new gesture.Point(15,50), new gesture.Point(85,50)]),
+		new gesture.Template("west", [new gesture.Point(85,50), new gesture.Point(15,50)]),
+		new gesture.Template("south-west", [new gesture.Point(85,15), new gesture.Point(15, 85)]),
+		new gesture.Template("south-east", [new gesture.Point(15,15), new gesture.Point(85,85)]),
+		new gesture.Template("north-west", [new gesture.Point(85,85), new gesture.Point(15,15)]),
+		new gesture.Template("north-east", [new gesture.Point(15,85), new gesture.Point(85,15)]),
+	];
+	drawTemplates(templates);
 
 	console.log(recognizer);
+}
+
+// Draw templates on small canvas
+function drawTemplates(templates) {
+	var container = document.querySelector("#templates");
+	for (var i=0, n=templates.length; i<n; i++) {
+		drawTemplate(container, templates[i]);
+	}
+}
+
+function drawTemplate(container, template) {
+	var canvas = document.createElement("canvas");
+	var points = template.points;
+	var context = canvas.getContext("2d");
+
+	canvas.className = "template";
+	canvas.title = template.id;
+	canvas.id = template.id;
+
+	canvas.width = 100;
+	canvas.height = 100;
+
+	context.lineWidth = 5;
+	context.miterLimit = 0.1;
+
+	context.fond = "Microsoft Yahei";
+	context.fillText(template.id, 15, 15);
+
+	context.strokeStyle = 'rgba(0,0,0,0.5)';
+	context.beginPath();
+	context.arc(points[0].x, points[0].y, 5, 0, 2*Math.PI);
+	context.stroke();
+
+	context.strokeStyle = 'rgba(255,64,64,0.5)';
+	context.beginPath();
+	context.moveTo(points[0].x, points[0].y);
+
+	for (var i=0, n=points.length; i<n; i++) {
+		context.lineTo(points[i].x, points[i].y);
+		context.lineCap = "round";
+		context.stroke();
+	}
+
+	container.appendChild(canvas);
 }

@@ -29,27 +29,24 @@ body {
 	width: 100%;
 }
 
-canvas {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 500px;
-	height: 500px;
-	border: .2em solid #DEDEDE;
-	margin: 1em;
-}
-
 #container {
 
 }
 
-#panel {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	width: 120px;
+#canvas {
+	width: 500px;
+	height: 300px;
+	border: .2em solid #DEDEDE;
+	margin: 1em;
 }
 
-#panel li {
-	list-style-type: none;
+#templates .template {
+	width: 100px;
+	height: 100px;
+	border: .2em solid #DEDEDE;
+	margin: .5em;
+}
+
+#templates .current {
+	border: .2em solid #FF0000;
 }

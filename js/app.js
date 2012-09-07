@@ -13,6 +13,9 @@ var canvas = null;
 var context = null;
 var recognizer = null;
 
+var Point = gesture.Point;
+var Template = gesture.Template;
+
 window.addEventListener("load", onload, false);
 
 // Grab the indicator elements
@@ -100,27 +103,48 @@ function getEvent(event, preventDefault) {
 // Note: the coordinate system in the browser is different from the mathmatic ones
 function createRecognizer() {
 	var templates = [
-		new gesture.Template("south", [new gesture.Point(0,0), new gesture.Point(0,1)]),
-		new gesture.Template("north", [new gesture.Point(0,1), new gesture.Point(0,0)]),
-		new gesture.Template("east", [new gesture.Point(0,0), new gesture.Point(1,0)]),
-		new gesture.Template("west", [new gesture.Point(1,0), new gesture.Point(0,0)]),
-		new gesture.Template("south-west", [new gesture.Point(0,0), new gesture.Point(-1,1)]),
-		new gesture.Template("south-east", [new gesture.Point(0,0), new gesture.Point(1,1)]),
-		new gesture.Template("north-west", [new gesture.Point(0,0), new gesture.Point(-1,-1)]),
-		new gesture.Template("north-east", [new gesture.Point(0,0), new gesture.Point(1,-1)]),
+		// Directions
+		new Template("south", [new Point(0,0), new Point(0,1)]),
+		new Template("north", [new Point(0,1), new Point(0,0)]),
+		new Template("east", [new Point(0,0), new Point(1,0)]),
+		new Template("west", [new Point(1,0), new Point(0,0)]),
+		new Template("south-west", [new Point(0,0), new Point(-1,1)]),
+		new Template("south-east", [new Point(0,0), new Point(1,1)]),
+		new Template("north-west", [new Point(0,0), new Point(-1,-1)]),
+		new Template("north-east", [new Point(0,0), new Point(1,-1)]),
+
+		// Gestures
+		new Template("right-down", [new Point(0,0), new Point(1,0), new Point(1,1)]),
+		new Template("right-up", [new Point(0,0), new Point(1,0), new Point(1,-1)]),
+		new Template("left-down", [new Point(1,0), new Point(0,0), new Point(0,1)]),
+		new Template("left-up", [new Point(1,0), new Point(0,0), new Point(0,-1)]),
+		new Template("down-left", [new Point(1,0), new Point(1,1), new Point(0,1)]),
+		new Template("down-right", [new Point(0,0), new Point(0,1), new Point(1,1)]),
+		new Template("up-left", [new Point(0,1), new Point(0,0), new Point(-1,0)]),
+		new Template("up-right", [new Point(0,1), new Point(0,0), new Point(1,1)]),
 	];
 
 	recognizer = new gesture.Recognizer(templates, 10, false);
 
 	var templates = [
-		new gesture.Template("south", [new gesture.Point(50,15), new gesture.Point(50,85)]),
-		new gesture.Template("north", [new gesture.Point(50,85), new gesture.Point(50,15)]),
-		new gesture.Template("east", [new gesture.Point(15,50), new gesture.Point(85,50)]),
-		new gesture.Template("west", [new gesture.Point(85,50), new gesture.Point(15,50)]),
-		new gesture.Template("south-west", [new gesture.Point(85,15), new gesture.Point(15, 85)]),
-		new gesture.Template("south-east", [new gesture.Point(15,15), new gesture.Point(85,85)]),
-		new gesture.Template("north-west", [new gesture.Point(85,85), new gesture.Point(15,15)]),
-		new gesture.Template("north-east", [new gesture.Point(15,85), new gesture.Point(85,15)]),
+		new Template("south", [new Point(50,15), new Point(50,85)]),
+		new Template("north", [new Point(50,85), new Point(50,15)]),
+		new Template("east", [new Point(15,50), new Point(85,50)]),
+		new Template("west", [new Point(85,50), new Point(15,50)]),
+		new Template("south-west", [new Point(85,15), new Point(15, 85)]),
+		new Template("south-east", [new Point(15,15), new Point(85,85)]),
+		new Template("north-west", [new Point(85,85), new Point(15,15)]),
+		new Template("north-east", [new Point(15,85), new Point(85,15)]),
+
+		// Gestures
+		new Template("right-down", [new Point(15,15), new Point(85,15), new Point(85,85)]),
+		new Template("right-up", [new Point(15,85), new Point(85,85), new Point(85,15)]),
+		new Template("left-down", [new Point(85,15), new Point(15,15), new Point(15,85)]),
+		new Template("left-up", [new Point(85,85), new Point(15,85), new Point(15,15)]),
+		new Template("down-left", [new Point(85,15), new Point(85,85), new Point(15,85)]),
+		new Template("down-right", [new Point(15,15), new Point(15,85), new Point(85,85)]),
+		new Template("up-left", [new Point(85,85), new Point(85,15), new Point(15,15)]),
+		new Template("up-right", [new Point(15,85), new Point(15,15), new Point(85,15)]),
 	];
 	drawTemplates(templates);
 

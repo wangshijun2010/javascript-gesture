@@ -29,6 +29,7 @@ function onload(event) {
 	canvas.addEventListener("mousedown", onmousedown, false);
 	canvas.addEventListener("mouseup", onmouseup, false);
 	canvas.addEventListener("mousemove", onmousemove, false);
+	canvas.addEventListener("mouseout", onmouseup, false);
 
 	// console.dir(canvas);
 	createRecognizer();

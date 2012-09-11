@@ -4,6 +4,58 @@
 		"selected_items":
 		[
 			[
+				"ge",
+				"gesture"
+			],
+			[
+				"P",
+				"Point  (function)"
+			],
+			[
+				"json",
+				"json_encode"
+			],
+			[
+				"para",
+				"parameter"
+			],
+			[
+				"p",
+				"previous  (function)"
+			],
+			[
+				"Mu",
+				"MusicPlayer  (class)"
+			],
+			[
+				"preg",
+				"preg_split"
+			],
+			[
+				"test",
+				"testCount"
+			],
+			[
+				"pl",
+				"play"
+			],
+			[
+				"pa",
+				"play  (function)"
+			],
+			[
+				"tem",
+				"templates"
+			],
+			[
+				"get",
+				"getContext"
+			],
+			[
+				"template",
+				"template"
+			],
+			[
 				"st",
 				"stringify"
 			],
@@ -62,10 +114,6 @@
 			[
 				"proto",
 				"prototype"
-			],
-			[
-				"template",
-				"templates"
 			],
 			[
 				"can",
@@ -144,10 +192,6 @@
 				"height"
 			],
 			[
-				"pa",
-				"panelScrollers"
-			],
-			[
 				"pane",
 				"panel-inner"
 			],
@@ -203,7 +247,7 @@
 			"file": "js/app.js",
 			"settings":
 			{
-				"buffer_size": 3092,
+				"buffer_size": 6322,
 				"line_ending": "Windows"
 			}
 		},
@@ -211,7 +255,7 @@
 			"file": "css/style.css",
 			"settings":
 			{
-				"buffer_size": 790,
+				"buffer_size": 793,
 				"line_ending": "Windows"
 			}
 		},
@@ -219,15 +263,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 488,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/chalkboard.js",
-			"settings":
-			{
-				"buffer_size": 38812,
+				"buffer_size": 362,
 				"line_ending": "Windows"
 			}
 		}
@@ -235,16 +271,24 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 375.0,
+		"height": 160.0,
 		"selected_items":
 		[
+			[
+				"git add",
+				"Git: Add..."
+			],
+			[
+				"git status",
+				"Git: Status"
+			],
 			[
 				"save",
 				"File: Save All"
 			],
 			[
-				"git status",
-				"Git: Status"
+				"sa",
+				"File: Save All"
 			],
 			[
 				"create",
@@ -257,10 +301,6 @@
 			[
 				"git co",
 				"Git: Commit"
-			],
-			[
-				"git add",
-				"Git: Add Current File"
 			],
 			[
 				"todo",
@@ -468,6 +508,9 @@
 	},
 	"file_history":
 	[
+		"/E/Documents/GitHub/javascript-gesture/6.php",
+		"/E/Documents/GitHub/javascript-gesture/5.data",
+		"/E/Documents/GitHub/javascript-gesture/js/chalkboard.js",
 		"/E/Documents/求职招聘/2012年版本/技术类201206.txt",
 		"/E/Documents/GitHub/javascript-gesture/js/gesture.js",
 		"/E/Documents/GitHub/javascript-gesture/README.md",
@@ -592,10 +635,7 @@
 		"/Z/www/mobile_image_search/mobileimage/views/default/advice/index.tpl",
 		"/Z/www/mobile_image_search/mobileimage/protected/lib/classes/ImageUtil.php",
 		"/Z/www/mobile_image_search/mobileimage/protected/lib/classes/ImageSearchClass.php",
-		"/Z/www/mobile_image_search/mobileimage/protected/lib/classes/ImageController.php",
-		"/Z/www/image_search/protected/modules/wap/controllers/IndexController.php",
-		"/Z/www/mobile_image_search/mobileimage/protected/lib/services/ImageAdviceService.php",
-		"/Z/www/mobile_image_search/mobileimage/protected/lib/classes/Controller.php"
+		"/Z/www/mobile_image_search/mobileimage/protected/lib/classes/ImageController.php"
 	],
 	"find":
 	{
@@ -614,6 +654,14 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"0",
+			"1",
+			"gesture.Template",
+			"gesture.Point",
+			"palyHistory",
+			"tmp",
+			"south",
+			"north",
 			"deepCopyPts",
 			"deepCopy",
 			"setTemplates",
@@ -733,22 +781,17 @@
 			"		<li class=\"tab\"></li>\n",
 			"\n		",
 			"tab",
-			"iScroll",
-			"scroll",
-			"onScrollEnd",
-			"$",
-			"panelInner",
-			"\"",
-			"\"C:\\Users\\shijun\\AppData\\Roaming\\Sublime Text 2\\Packages\\",
-			"copyrightprovider",
-			"panel"
+			"iScroll"
 		],
 		"highlight": true,
-		"in_selection": false,
+		"in_selection": true,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
 		[
+			"south",
+			"north",
+			"tmp",
 			"function(",
 			"[i]",
 			"",
@@ -794,7 +837,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -836,8 +879,8 @@
 						"selection":
 						[
 							[
-								1387,
-								1387
+								7492,
+								7492
 							]
 						],
 						"settings":
@@ -846,7 +889,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 902.0,
+						"translation.y": 5580.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -856,15 +899,15 @@
 					"file": "js/app.js",
 					"settings":
 					{
-						"buffer_size": 3092,
+						"buffer_size": 6322,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1254,
-								1254
+								847,
+								847
 							]
 						],
 						"settings":
@@ -873,7 +916,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 780.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -883,15 +926,15 @@
 					"file": "css/style.css",
 					"settings":
 					{
-						"buffer_size": 790,
+						"buffer_size": 793,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								659,
-								659
+								707,
+								707
 							]
 						],
 						"settings":
@@ -900,7 +943,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 360.0,
+						"translation.y": 540.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -910,15 +953,15 @@
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 488,
+						"buffer_size": 362,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								170,
-								170
+								339,
+								339
 							]
 						],
 						"settings":
@@ -928,34 +971,6 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "js/chalkboard.js",
-					"settings":
-					{
-						"buffer_size": 38812,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1719,
-								1767
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1080.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1046,7 +1061,7 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 231.0,
 	"status_bar_visible": true
 }
